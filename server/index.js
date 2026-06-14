@@ -2,6 +2,8 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const { sequelize } = require('./models');
+const artisanRoutes = require('./routes/artisanRoutes');
+const categorieRoutes = require('./routes/categorieRoutes');
 
 const app = express();
 
@@ -11,6 +13,9 @@ app.use(express.json());
 app.get('/', (req, res) => {
   res.json({ message: 'API Trouve ton artisan opérationnelle' });
 });
+
+app.use('/api/artisans', artisanRoutes);
+app.use('/api/categories', categorieRoutes);
 
 const PORT = process.env.PORT || 5000;
 
