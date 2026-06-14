@@ -12,6 +12,7 @@ const getAllArtisans = async (req, res, next) => {
 
     const specialiteInclude = {
       model: Specialite,
+      required: Boolean(categorie),
       include: [
         {
           model: Categorie,
@@ -24,6 +25,7 @@ const getAllArtisans = async (req, res, next) => {
       where,
       include: [specialiteInclude],
       order: [['nom', 'ASC']],
+      subQuery: false,
     });
 
     res.json(artisans);
