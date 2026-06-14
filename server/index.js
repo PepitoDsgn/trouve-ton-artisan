@@ -4,6 +4,8 @@ const cors = require('cors');
 const { sequelize } = require('./models');
 const artisanRoutes = require('./routes/artisanRoutes');
 const categorieRoutes = require('./routes/categorieRoutes');
+const notFound = require('./middlewares/notFound');
+const errorHandler = require('./middlewares/errorHandler');
 
 const app = express();
 
@@ -16,6 +18,9 @@ app.get('/', (req, res) => {
 
 app.use('/api/artisans', artisanRoutes);
 app.use('/api/categories', categorieRoutes);
+
+app.use(notFound);
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 
