@@ -1,0 +1,242 @@
+// Variables
+$primary: #0074c7;
+$primary-dark: #00497c;
+$bg-light: #f1f8fc;
+$dark-gray: #384050;
+$red-accent: #cd2c2e;
+$green-accent: #82b864;
+
+// Bootstrap overrides
+$theme-colors: (
+  'primary': $primary,
+);
+$body-bg: #ffffff;
+$body-color: $dark-gray;
+$border-radius-pill: 50rem;
+
+@import 'bootstrap/scss/bootstrap';
+
+// Global
+body {
+  font-family: 'Graphik', Arial, sans-serif;
+}
+
+// Navbar
+.navbar-artisan {
+  background-color: $primary-dark;
+
+  .navbar-logo {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 6px 12px;
+    line-height: 1.2;
+
+    .logo-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: $dark-gray;
+    }
+
+    .logo-sub {
+      font-size: 0.6rem;
+      color: $primary;
+      display: block;
+    }
+  }
+
+  .btn-categorie {
+    border: 2px solid #fff;
+    color: #fff;
+    border-radius: 50rem;
+    padding: 6px 18px;
+    font-size: 0.9rem;
+    background: transparent;
+    transition: background 0.2s, color 0.2s;
+
+    &.active,
+    &:hover {
+      background-color: $primary;
+      border-color: $primary;
+      color: #fff;
+    }
+  }
+}
+
+// SearchBar
+.searchbar-wrapper {
+  background-color: $bg-light;
+  padding: 14px 16px;
+
+  .searchbar-input {
+    border-radius: 50rem;
+    border: 1.5px solid #cce4f5;
+    background-color: $bg-light;
+    padding: 10px 20px;
+    font-size: 0.95rem;
+    width: 100%;
+    max-width: 680px;
+    display: block;
+    margin: 0 auto;
+
+    &:focus {
+      outline: none;
+      border-color: $primary;
+      box-shadow: 0 0 0 3px rgba($primary, 0.15);
+    }
+  }
+}
+
+// Artisan card
+.artisan-card {
+  border-radius: 16px;
+  border: none;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+  background: #fff;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.13);
+  }
+
+  .artisan-card-img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+  }
+
+  .artisan-card-body {
+    padding: 14px 16px 16px;
+
+    .artisan-card-nom {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: $dark-gray;
+      margin-bottom: 4px;
+    }
+
+    .artisan-card-stars {
+      color: #f5a623;
+      font-size: 0.85rem;
+    }
+
+    .artisan-card-specialite {
+      font-size: 0.85rem;
+      color: $dark-gray;
+    }
+
+    .artisan-card-ville {
+      font-size: 0.85rem;
+      color: $dark-gray;
+
+      &::before {
+        content: '📍 ';
+      }
+    }
+  }
+}
+
+// Section titles
+.section-title {
+  color: $primary;
+  font-weight: 700;
+  text-align: center;
+}
+
+// How-to section
+.how-to-number {
+  font-size: 5rem;
+  font-weight: 700;
+  color: $primary;
+  line-height: 1;
+}
+
+// Contact form
+.contact-form-section {
+  background-color: $primary;
+  border-radius: 16px;
+  padding: 32px;
+  color: #fff;
+
+  label {
+    color: #fff;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+
+  .form-control {
+    border-radius: 8px;
+    border: none;
+    background-color: $bg-light;
+  }
+
+  .btn-envoyer {
+    background: #fff;
+    color: $dark-gray;
+    border-radius: 50rem;
+    font-weight: 700;
+    font-size: 1.1rem;
+    padding: 12px 40px;
+    border: none;
+
+    &:hover {
+      background: darken(#fff, 8%);
+    }
+  }
+}
+
+// Footer
+.footer-artisan {
+  background-color: $dark-gray;
+  color: #b0b8c9;
+  padding: 40px 0 24px;
+
+  a {
+    color: #b0b8c9;
+    text-decoration: none;
+
+    &:hover {
+      color: #fff;
+    }
+  }
+
+  .footer-logo {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 8px 14px;
+    display: inline-block;
+
+    .logo-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: $dark-gray;
+    }
+
+    .logo-sub {
+      font-size: 0.55rem;
+      color: $primary;
+      display: block;
+    }
+  }
+}
+
+// Mobile carousel
+.artisans-carousel {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding: 8px 4px 16px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  .artisan-card {
+    flex: 0 0 78%;
+    scroll-snap-align: center;
+  }
+}
