@@ -74,19 +74,77 @@ main {
   .navbar-logo {
     background-color: #fff;
     border-radius: 8px;
-    padding: 6px 12px;
-    line-height: 1.2;
+    padding: 6px 10px;
+    display: inline-flex;
+    align-items: center;
+  }
 
-    .logo-title {
-      font-size: 1rem;
-      font-weight: 700;
-      color: $dark-gray;
+  // Burger button
+  .burger-btn {
+    background: none;
+    border: none;
+    padding: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .burger-icon {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 28px;
+    height: 20px;
+
+    span {
+      display: block;
+      height: 3px;
+      width: 100%;
+      background: #fff;
+      border-radius: 3px;
+      transition: transform 0.3s ease, opacity 0.3s ease, width 0.3s ease;
+      transform-origin: center;
     }
 
-    .logo-sub {
-      font-size: 0.6rem;
-      color: $primary;
-      display: block;
+    &.open {
+      span:nth-child(1) { transform: translateY(8.5px) rotate(45deg); }
+      span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+      span:nth-child(3) { transform: translateY(-8.5px) rotate(-45deg); }
+    }
+  }
+
+  // Menu mobile déroulant
+  .mobile-menu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+
+    &.open { max-height: 300px; }
+  }
+
+  .mobile-menu-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 16px 0 8px;
+  }
+
+  .btn-categorie-mobile {
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    color: #fff;
+    border-radius: 50rem;
+    padding: 10px 20px;
+    font-size: 1rem;
+    background: transparent;
+    text-align: left;
+    width: 100%;
+    transition: background 0.2s, border-color 0.2s;
+
+    &.active,
+    &:hover {
+      background: $primary;
+      border-color: $primary;
     }
   }
 
@@ -251,29 +309,18 @@ main {
   .footer-logo {
     background-color: #fff;
     border-radius: 8px;
-    padding: 8px 14px;
-    display: inline-block;
-
-    .logo-title {
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: $dark-gray;
-    }
-
-    .logo-sub {
-      font-size: 0.55rem;
-      color: $primary;
-      display: block;
-    }
+    padding: 8px 12px;
+    display: inline-flex;
+    align-items: center;
   }
 }
 
-// Mobile carousel
+// Carousel horizontal natif (mobile / tablette)
 .artisans-carousel {
   display: flex;
   gap: 16px;
   overflow-x: auto;
-  padding: 8px 4px 16px;
+  padding: 8px 16px 20px;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
 
@@ -282,7 +329,8 @@ main {
   }
 
   .artisan-card {
-    flex: 0 0 78%;
-    scroll-snap-align: center;
+    flex: 0 0 78vw;
+    max-width: 300px;
+    scroll-snap-align: start;
   }
 }
