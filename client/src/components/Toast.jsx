@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 
 const types = {
-  success: { bg: '#2e7d32', icon: '✓' },
-  warning: { bg: '#e65100', icon: '!' },
-  error:   { bg: '#c62828', icon: '✕' },
+  success: { bg: '#82b864', icon: '✓' },
+  warning: { bg: '#cd2c2e', icon: '!' },
+  error:   { bg: '#cd2c2e', icon: '✕' },
 };
 
 function Toast({ message, type = 'success', onClose }) {
