@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import ArtisanCard from '../components/ArtisanCard';
+import { getArtisansDuMois } from '../services/api';
 
 const etapes = [
   { num: 1, texte: "Choisir une Catégorie d'Artisan dans le menu" },
@@ -13,7 +13,7 @@ function Accueil() {
   const [artisansDuMois, setArtisansDuMois] = useState([]);
 
   useEffect(() => {
-    axios.get('/api/artisans/du-mois').then((res) => setArtisansDuMois(res.data));
+    getArtisansDuMois().then(setArtisansDuMois);
   }, []);
 
   useEffect(() => {

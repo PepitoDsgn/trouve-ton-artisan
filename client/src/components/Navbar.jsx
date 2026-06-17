@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import axios from 'axios';
 import logo from '../assets/logo.png';
+import { getCategories } from '../services/api';
 
 function BurgerIcon({ open }) {
   return (
@@ -24,7 +24,7 @@ function Navbar() {
     : null;
 
   useEffect(() => {
-    axios.get('/api/categories').then((res) => setCategories(res.data));
+    getCategories().then(setCategories);
   }, []);
 
   const handleCategorie = (id) => {

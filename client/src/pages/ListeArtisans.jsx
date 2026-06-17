@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import axios from 'axios';
 import ArtisanCard from '../components/ArtisanCard';
+import { getArtisans, getCategories } from '../services/api';
 
 const titresCategorie = {
   Bâtiment: 'Les Artisans du Bâtiment',
@@ -25,16 +25,16 @@ function ListeArtisans() {
     if (categorieId) params.categorie = categorieId;
     if (recherche) params.recherche = recherche;
 
-    axios.get('/api/artisans', { params }).then((res) => {
-      setArtisans(res.data);
+    getArtisans(params).then((data) => {
+      setArtisans(data);
       setLoading(false);
     });
   }, [categorieId, recherche]);
 
   useEffect(() => {
     if (categorieId) {
-      axios.get('/api/categories').then((res) => {
-        const cat = res.data.find((c) => c.id === Number(categorieId));
+      getCategories().then((data) => {
+        const cat = data.find((c) => c.id === Number(categorieId));
         if (cat) {
           const t = titresCategorie[cat.nom] || `Les Artisans – ${cat.nom}`;
           setTitre(t);

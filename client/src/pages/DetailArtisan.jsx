@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { getArtisan, sendContact } from '../services/api';
 
 function DetailArtisan() {
   const { id } = useParams();
@@ -10,9 +10,9 @@ function DetailArtisan() {
   const [statut, setStatut] = useState(null);
 
   useEffect(() => {
-    axios.get(`/api/artisans/${id}`).then((res) => {
-      setArtisan(res.data);
-      document.title = `${res.data.nom} – Trouve ton artisan !`;
+    getArtisan(id).then((data) => {
+      setArtisan(data);
+      document.title = `${data.nom} – Trouve ton artisan !`;
     }).catch(() => navigate('/404', { replace: true }));
   }, [id, navigate]);
 
@@ -22,8 +22,19 @@ function DetailArtisan() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!form.nom.trim() || !form.email.trim() || !form.message.trim()) {
+      setStatut('validation');
+      return;
+    }
+    if (!emailRegex.test(form.email)) {
+      setStatut('emailInvalid');
+      return;
+    }
+
     try {
-      await axios.post(`/api/artisans/${id}/contact`, form);
+      await sendContact(id, form);
       setStatut('success');
       setForm({ nom: '', email: '', objet: '', message: '' });
     } catch {
@@ -123,6 +134,16 @@ function DetailArtisan() {
         {statut === 'success' && (
           <div className="alert alert-success" role="alert">
             Votre message a bien été envoyé. Une réponse vous sera apportée sous 48h.
+          </div>
+        )}
+        {statut === 'validation' && (
+          <div className="alert alert-warning" role="alert">
+            Veuillez remplir les champs nom, email et message.
+          </div>
+        )}
+        {statut === 'emailInvalid' && (
+          <div className="alert alert-warning" role="alert">
+            L'adresse email saisie n'est pas valide.
           </div>
         )}
         {statut === 'error' && (
