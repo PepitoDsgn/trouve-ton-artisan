@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getArtisan, sendContact } from '../services/api';
+import Toast from '../components/Toast';
 
 function DetailArtisan() {
   const { id } = useParams();
@@ -132,24 +133,32 @@ function DetailArtisan() {
         </h2>
 
         {statut === 'success' && (
-          <div className="alert alert-success" role="alert">
-            Votre message a bien été envoyé. Une réponse vous sera apportée sous 48h.
-          </div>
+          <Toast
+            message="Votre message a bien été envoyé. Une réponse vous sera apportée sous 48h."
+            type="success"
+            onClose={() => setStatut(null)}
+          />
         )}
         {statut === 'validation' && (
-          <div className="alert alert-warning" role="alert">
-            Veuillez remplir les champs nom, email et message.
-          </div>
+          <Toast
+            message="Veuillez remplir les champs nom, email et message."
+            type="warning"
+            onClose={() => setStatut(null)}
+          />
         )}
         {statut === 'emailInvalid' && (
-          <div className="alert alert-warning" role="alert">
-            L'adresse email saisie n'est pas valide.
-          </div>
+          <Toast
+            message="L'adresse email saisie n'est pas valide."
+            type="warning"
+            onClose={() => setStatut(null)}
+          />
         )}
         {statut === 'error' && (
-          <div className="alert alert-danger" role="alert">
-            Une erreur est survenue. Veuillez réessayer.
-          </div>
+          <Toast
+            message="Une erreur est survenue. Veuillez réessayer."
+            type="error"
+            onClose={() => setStatut(null)}
+          />
         )}
 
         <form onSubmit={handleSubmit} className="contact-form-section">
