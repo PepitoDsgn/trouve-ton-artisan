@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
+import logo from '../assets/logo.png';
 
-function Logo() {
+function BurgerIcon({ open }) {
   return (
-    <div className="navbar-logo">
-      <span className="logo-title">Trouve ton artisan !</span>
-      <span className="logo-sub">Avec la région</span>
-      <span className="logo-sub">Auvergne-Rhône-Alpes</span>
+    <div className={`burger-icon${open ? ' open' : ''}`} aria-hidden="true">
+      <span />
+      <span />
+      <span />
     </div>
   );
 }
@@ -31,16 +32,24 @@ function Navbar() {
     navigate(`/artisans?categorie=${id}`);
   };
 
+  const handleAccueil = (e) => {
+    e.preventDefault();
+    setMenuOpen(false);
+    navigate('/');
+  };
+
   return (
-    <nav className="navbar-artisan px-3 px-md-4 py-3" aria-label="Navigation principale">
+    <nav className="navbar-artisan px-3 px-md-4 py-2" aria-label="Navigation principale">
       <div className="d-flex justify-content-between align-items-center">
         <a
           href="/"
           className="text-decoration-none"
           aria-label="Accueil – Trouve ton artisan !"
-          onClick={(e) => { e.preventDefault(); navigate('/'); }}
+          onClick={handleAccueil}
         >
-          <Logo />
+          <div className="navbar-logo">
+            <img src={logo} alt="Trouve ton artisan !" height="62" />
+          </div>
         </a>
 
         {/* Desktop nav */}
@@ -57,25 +66,24 @@ function Navbar() {
           ))}
         </div>
 
-        {/* Mobile hamburger */}
+        {/* Burger button */}
         <button
-          className="d-md-none btn p-0 border-0"
-          aria-label="Menu"
+          className="d-md-none burger-btn"
+          aria-label={menuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
           aria-expanded={menuOpen}
           onClick={() => setMenuOpen((o) => !o)}
-          style={{ background: 'none' }}
         >
-          <span style={{ fontSize: '1.6rem', color: '#fff' }}>☰</span>
+          <BurgerIcon open={menuOpen} />
         </button>
       </div>
 
-      {/* Mobile menu dropdown */}
-      {menuOpen && (
-        <div className="d-md-none d-flex flex-column gap-2 mt-3">
+      {/* Mobile menu déroulant */}
+      <div className={`mobile-menu${menuOpen ? ' open' : ''}`}>
+        <div className="mobile-menu-inner">
           {categories.map((cat) => (
             <button
               key={cat.id}
-              className={`btn-categorie${categorieActive === cat.id ? ' active' : ''}`}
+              className={`btn-categorie-mobile${categorieActive === cat.id ? ' active' : ''}`}
               onClick={() => handleCategorie(cat.id)}
               aria-pressed={categorieActive === cat.id}
             >
@@ -83,7 +91,7 @@ function Navbar() {
             </button>
           ))}
         </div>
-      )}
+      </div>
     </nav>
   );
 }
