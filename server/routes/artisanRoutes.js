@@ -5,12 +5,13 @@ const {
   getArtisansDuMois,
 } = require('../controllers/artisanController');
 const { sendContactMessage } = require('../controllers/contactController');
+const { contactLimiter } = require('../middlewares/rateLimiter');
 
 const router = express.Router();
 
 router.get('/du-mois', getArtisansDuMois);
 router.get('/:id', getArtisanById);
 router.get('/', getAllArtisans);
-router.post('/:id/contact', sendContactMessage);
+router.post('/:id/contact', contactLimiter, sendContactMessage);
 
 module.exports = router;
