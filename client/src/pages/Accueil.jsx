@@ -61,17 +61,19 @@ function Accueil() {
             Les Artisans du mois
           </h2>
 
-          {/* Desktop / tablette : grille */}
-          <div className="d-none d-sm-flex row g-4 justify-content-center">
-            {artisansDuMois.map((a) => (
-              <div key={a.id} className="col-sm-6 col-lg-4">
-                <ArtisanCard artisan={a} />
-              </div>
-            ))}
+          {/* Desktop (≥992px) : grille 3 colonnes */}
+          <div className="d-none d-lg-block">
+            <div className="row g-4 justify-content-center">
+              {artisansDuMois.map((a) => (
+                <div key={a.id} className="col-lg-4">
+                  <ArtisanCard artisan={a} />
+                </div>
+              ))}
+            </div>
           </div>
 
-          {/* Mobile : carousel horizontal */}
-          <div className="d-sm-none artisans-carousel" aria-label="Artisans du mois">
+          {/* Mobile + tablette (<992px) : scroll horizontal natif */}
+          <div className="d-lg-none artisans-carousel" aria-label="Artisans du mois">
             {artisansDuMois.map((a) => (
               <ArtisanCard key={a.id} artisan={a} />
             ))}

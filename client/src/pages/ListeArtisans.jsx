@@ -60,19 +60,30 @@ function ListeArtisans() {
         <p className="text-center text-muted">Aucun artisan trouvé.</p>
       ) : (
         <>
-          {/* Desktop / tablette : grille */}
-          <div className="d-none d-sm-block">
+          {/* Desktop (≥992px) : grille 4 colonnes */}
+          <div className="d-none d-lg-block">
             <div className="row g-4">
               {artisans.map((a) => (
-                <div key={a.id} className="col-sm-6 col-lg-3">
+                <div key={a.id} className="col-lg-3">
                   <ArtisanCard artisan={a} />
                 </div>
-                ))}
+              ))}
             </div>
           </div>
 
-          {/* Mobile : carousel */}
-          <div className="d-sm-none artisans-carousel" aria-label="Liste des artisans">
+          {/* Tablette (768-991px) : grille 2 colonnes */}
+          <div className="d-none d-md-block d-lg-none">
+            <div className="row g-4">
+              {artisans.map((a) => (
+                <div key={a.id} className="col-6">
+                  <ArtisanCard artisan={a} />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Mobile (<768px) : scroll horizontal natif */}
+          <div className="d-md-none artisans-carousel" aria-label="Liste des artisans">
             {artisans.map((a) => (
               <ArtisanCard key={a.id} artisan={a} />
             ))}
