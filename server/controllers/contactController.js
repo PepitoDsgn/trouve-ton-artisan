@@ -15,15 +15,15 @@ const sendContactMessage = async (req, res, next) => {
       return res.status(404).json({ message: 'Artisan introuvable' });
     }
 
-    await transporter.sendMail({
+    res.status(200).json({ message: 'Votre message a bien été envoyé' });
+
+    transporter.sendMail({
       from: process.env.EMAIL_USER,
       to: artisan.email,
       replyTo: email,
       subject: objet || `Nouveau message de ${nom} via Trouve ton artisan`,
       text: `${message}\n\nContact : ${nom} (${email})`,
-    });
-
-    res.status(200).json({ message: 'Votre message a bien été envoyé' });
+    }).catch((err) => console.error('Erreur envoi email :', err.message));
   } catch (error) {
     next(error);
   }
