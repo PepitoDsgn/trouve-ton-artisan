@@ -28,14 +28,19 @@ app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 
-sequelize
-  .authenticate()
-  .then(() => {
-    console.log('Connexion à la base de données réussie');
-    app.listen(PORT, () => {
-      console.log(`Serveur démarré sur le port ${PORT}`);
-    });
-  })
-  .catch((error) => {
-    console.error('Impossible de se connecter à la base de données :', error);
-  });
+app.get('/health', async (_req, res) => {
+  try {
+    await sequelize.authenticate();
+    res.json({ status: 'ok', db: 'connected' });
+  } catch (err) {
+    res.status(503).json({ status: 'error', db: err.message });
+  }
+});
+
+app.listen(PORT, () => {
+  console.log(`Serveur démarré sur le port ${PORT}`);
+  sequelize
+    .authenticate()
+    .then(() => console.log('Connexion à la base de données réussie'))
+    .catch((err) => console.error('Erreur DB :', err.message));
+});
