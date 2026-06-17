@@ -37,7 +37,15 @@ app.get('/health', async (_req, res) => {
   }
 });
 
-app.listen(PORT, () => {
+process.on('unhandledRejection', (reason) => {
+  console.error('Unhandled Rejection:', reason);
+});
+
+process.on('uncaughtException', (err) => {
+  console.error('Uncaught Exception:', err);
+});
+
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`Serveur démarré sur le port ${PORT}`);
   sequelize
     .authenticate()
