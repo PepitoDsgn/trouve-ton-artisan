@@ -1,13 +1,15 @@
+const { validationResult } = require('express-validator');
 const { Artisan } = require('../models');
 const transporter = require('../config/mailer');
 
 const sendContactMessage = async (req, res, next) => {
   try {
-    const { nom, email, objet, message } = req.body;
-
-    if (!nom || !email || !message) {
-      return res.status(400).json({ message: 'Les champs nom, email et message sont obligatoires' });
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ message: errors.array()[0].msg, errors: errors.array() });
     }
+
+    const { nom, email, objet, message } = req.body;
 
     const artisan = await Artisan.findByPk(req.params.id);
 
