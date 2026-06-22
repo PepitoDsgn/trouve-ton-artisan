@@ -1,16 +1,11 @@
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function ArtisanCard({ artisan }) {
-  const navigate = useNavigate();
-
   return (
-    <article
+    <Link
+      to={`/artisans/${artisan.id}`}
       className="artisan-card"
-      onClick={() => navigate(`/artisans/${artisan.id}`)}
-      role="button"
-      tabIndex={0}
       aria-label={`Voir le profil de ${artisan.nom}`}
-      onKeyDown={(e) => e.key === 'Enter' && navigate(`/artisans/${artisan.id}`)}
     >
       {artisan.image ? (
         <img
@@ -35,7 +30,7 @@ function ArtisanCard({ artisan }) {
         )}
         <p className="artisan-card-ville mb-0">{artisan.ville}</p>
       </div>
-    </article>
+    </Link>
   );
 }
 

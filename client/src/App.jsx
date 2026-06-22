@@ -11,9 +11,12 @@ import NotFound from './pages/NotFound';
 function App() {
   return (
     <BrowserRouter>
+      <a href="#contenu-principal" className="visually-hidden-focusable">
+        Aller au contenu principal
+      </a>
       <Navbar />
       <SearchBar />
-      <main>
+      <main id="contenu-principal">
         <Routes>
           <Route path="/" element={<Accueil />} />
           <Route path="/artisans" element={<ListeArtisans />} />

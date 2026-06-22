@@ -83,9 +83,10 @@ function DetailArtisan() {
         </div>
 
         <div className="col-md-8">
-          <h1 style={{ color: '#0074c7', fontWeight: 700 }}>
+          <h1 style={{ color: '#0074c7', fontWeight: 700 }}>{artisan.nom}</h1>
+          <h2 style={{ color: '#0074c7', fontWeight: 700 }}>
             À propos de {artisan.nom}
-          </h1>
+          </h2>
           <p className="mt-3">{artisan.description}</p>
           <p className="text-muted">
             Si vous souhaitez faire appel à ce professionnel, vous pouvez le
