@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { getArtisan, sendContact } from '../services/api';
 import Toast from '../components/Toast';
 
@@ -13,7 +14,6 @@ function DetailArtisan() {
   useEffect(() => {
     getArtisan(id).then((data) => {
       setArtisan(data);
-      document.title = `${data.nom} – Trouve ton artisan !`;
     }).catch(() => navigate('/404', { replace: true }));
   }, [id, navigate]);
 
@@ -47,6 +47,13 @@ function DetailArtisan() {
 
   return (
     <div className="container py-5">
+      <Helmet>
+        <title>{artisan.nom} – Trouve ton artisan !</title>
+        <meta
+          name="description"
+          content={`${artisan.nom}${artisan.Specialite ? `, ${artisan.Specialite.nom}` : ''} à ${artisan.ville}. Contactez cet artisan via Trouve ton artisan !`}
+        />
+      </Helmet>
       {/* Layout desktop/tablette : 2 colonnes */}
       <div className="row g-5 d-none d-md-flex mb-5">
         <div className="col-md-4 text-center">

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import ArtisanCard from '../components/ArtisanCard';
 import { getArtisansDuMois } from '../services/api';
 
@@ -16,12 +17,15 @@ function Accueil() {
     getArtisansDuMois().then(setArtisansDuMois);
   }, []);
 
-  useEffect(() => {
-    document.title = 'Trouve ton artisan ! – Auvergne-Rhône-Alpes';
-  }, []);
-
   return (
     <>
+      <Helmet>
+        <title>Trouve ton artisan ! – Auvergne-Rhône-Alpes</title>
+        <meta
+          name="description"
+          content="Trouvez facilement un artisan près de chez vous en Auvergne-Rhône-Alpes : bâtiment, services, fabrication, alimentation. Contactez-le en quelques clics."
+        />
+      </Helmet>
       <div className="container py-5">
         <section aria-labelledby="comment-trouver">
           <h1 id="comment-trouver" className="section-title mb-5">

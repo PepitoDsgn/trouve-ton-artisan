@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import ArtisanCard from '../components/ArtisanCard';
 import { getArtisans, getCategories } from '../services/api';
 
@@ -38,7 +39,6 @@ function ListeArtisans() {
         if (cat) {
           const t = titresCategorie[cat.nom] || `Les Artisans – ${cat.nom}`;
           setTitre(t);
-          document.title = `${t} – Trouve ton artisan !`;
         }
       });
     } else {
@@ -46,12 +46,18 @@ function ListeArtisans() {
         ? `Résultats pour "${recherche}"`
         : 'Nos Artisans';
       setTitre(t);
-      document.title = `${t} – Trouve ton artisan !`;
     }
   }, [categorieId, recherche]);
 
   return (
     <div className="container py-5">
+      <Helmet>
+        <title>{titre} – Trouve ton artisan !</title>
+        <meta
+          name="description"
+          content={`${titre} en Auvergne-Rhône-Alpes : parcourez les artisans, filtrez par catégorie et contactez celui qu'il vous faut.`}
+        />
+      </Helmet>
       <h1 className="section-title mb-5">{titre}</h1>
 
       {loading ? (
