@@ -1,5 +1,8 @@
 require('dotenv').config();
 const { sequelize, Categorie, Specialite, Artisan } = require('./models');
+const { fetchEntreprisesPourSpecialite } = require('./seedData/entreprisesApi');
+
+const NB_ARTISANS_PAR_API = 5;
 
 const seed = async () => {
   await sequelize.sync({ force: true });
@@ -137,6 +140,20 @@ const seed = async () => {
       artisanDuMois: false,
     },
   ]);
+
+  for (const specialite of specialites) {
+    try {
+      const entreprises = await fetchEntreprisesPourSpecialite(specialite.nom, NB_ARTISANS_PAR_API);
+      if (entreprises.length === 0) continue;
+
+      await Artisan.bulkCreate(
+        entreprises.map((entreprise) => ({ ...entreprise, specialiteId: specialite.id }))
+      );
+      console.log(`${entreprises.length} artisan(s) « ${specialite.nom} » récupéré(s) via l'API`);
+    } catch (error) {
+      console.warn(`Impossible de récupérer des artisans « ${specialite.nom} » via l'API : ${error.message}`);
+    }
+  }
 
   console.log('Données de test insérées avec succès');
   await sequelize.close();
