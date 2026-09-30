@@ -2,6 +2,7 @@ const sequelize = require('../config/database');
 const Categorie = require('./categorie');
 const Specialite = require('./specialite');
 const Artisan = require('./artisan');
+const Utilisateur = require('./utilisateur');
 
 Categorie.hasMany(Specialite, { foreignKey: 'categorieId', onDelete: 'CASCADE' });
 Specialite.belongsTo(Categorie, { foreignKey: 'categorieId' });
@@ -14,4 +15,5 @@ module.exports = {
   Categorie,
   Specialite,
   Artisan,
+  Utilisateur,
 };

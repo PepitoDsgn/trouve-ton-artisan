@@ -2,7 +2,9 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
+const cookieParser = require('cookie-parser');
 const { sequelize } = require('./models');
+const authRoutes = require('./routes/authRoutes');
 const artisanRoutes = require('./routes/artisanRoutes');
 const categorieRoutes = require('./routes/categorieRoutes');
 const notFound = require('./middlewares/notFound');
@@ -13,13 +15,16 @@ const app = express();
 app.use(helmet());
 app.use(cors({
   origin: process.env.CLIENT_URL || 'http://localhost:5173',
+  credentials: true,
 }));
 app.use(express.json());
+app.use(cookieParser());
 
 app.get('/', (req, res) => {
   res.json({ message: 'API Trouve ton artisan opérationnelle' });
 });
 
+app.use('/api/auth', authRoutes);
 app.use('/api/artisans', artisanRoutes);
 app.use('/api/categories', categorieRoutes);
 

@@ -1,6 +1,7 @@
 require('dotenv').config();
 const { sequelize, Categorie, Specialite, Artisan } = require('./models');
 const { fetchEntreprisesPourSpecialite } = require('./seedData/entreprisesApi');
+const { creerOuMettreAJourAdmin } = require('./services/authService');
 
 const NB_ARTISANS_PAR_API = 5;
 
@@ -153,6 +154,11 @@ const seed = async () => {
     } catch (error) {
       console.warn(`Impossible de récupérer des artisans « ${specialite.nom} » via l'API : ${error.message}`);
     }
+  }
+
+  if (process.env.ADMIN_EMAIL && process.env.ADMIN_PASSWORD) {
+    await creerOuMettreAJourAdmin({ email: process.env.ADMIN_EMAIL, motDePasse: process.env.ADMIN_PASSWORD });
+    console.log(`Administrateur ${process.env.ADMIN_EMAIL} créé`);
   }
 
   console.log('Données de test insérées avec succès');
