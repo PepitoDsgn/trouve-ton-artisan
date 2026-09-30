@@ -50,3 +50,10 @@ export const deconnexion = () => api.post('/auth/deconnexion');
 
 export const getMoi = () =>
   api.get('/auth/moi').then((response) => response.data.utilisateur);
+
+export const getFavoris = () =>
+  api.get('/favoris').then((response) => response.data);
+
+export const ajouterFavori = (artisanId) => api.put(`/favoris/${artisanId}`);
+
+export const retirerFavori = (artisanId) => api.delete(`/favoris/${artisanId}`);

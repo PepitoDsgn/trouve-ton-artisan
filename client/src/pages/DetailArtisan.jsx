@@ -1,6 +1,7 @@
 import { useParams, Navigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import Toast from '../components/Toast';
+import BoutonFavori from '../components/BoutonFavori';
 import useArtisan from '../hooks/useArtisan';
 import useContactForm from '../hooks/useContactForm';
 import useAuth from '../hooks/useAuth';
@@ -52,7 +53,10 @@ function DetailArtisan() {
         </div>
 
         <div className="col-md-8">
-          <h1 style={{ color: '#0074c7', fontWeight: 700 }}>{artisan.nom}</h1>
+          <div className="d-flex align-items-start gap-3">
+            <h1 style={{ color: '#0074c7', fontWeight: 700 }}>{artisan.nom}</h1>
+            <BoutonFavori artisan={artisan} className="btn-favori-fiche" />
+          </div>
           <h2 style={{ color: '#0074c7', fontWeight: 700 }}>
             À propos de {artisan.nom}
           </h2>
@@ -66,9 +70,12 @@ function DetailArtisan() {
 
       {/* Layout mobile : empilé */}
       <div className="d-md-none text-center mb-4">
-        <h1 style={{ color: '#0074c7', fontWeight: 700 }} className="mb-3">
-          {artisan.nom}
-        </h1>
+        <div className="d-flex justify-content-center align-items-start gap-2 mb-3">
+          <h1 style={{ color: '#0074c7', fontWeight: 700 }} className="mb-0">
+            {artisan.nom}
+          </h1>
+          <BoutonFavori artisan={artisan} className="btn-favori-fiche" />
+        </div>
         {artisan.image ? (
           <img
             src={artisan.image}

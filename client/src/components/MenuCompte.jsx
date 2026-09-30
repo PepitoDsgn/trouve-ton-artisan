@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 
 // Liens du compte dans la navbar. variante = 'desktop' (boutons pilule)
@@ -23,9 +23,14 @@ function MenuCompte({ variante, onNavigate }) {
   }
 
   return (
-    <button type="button" className={classe} onClick={handleDeconnexion}>
-      Déconnexion
-    </button>
+    <>
+      <NavLink to="/favoris" className={classe} onClick={onNavigate}>
+        Mes favoris
+      </NavLink>
+      <button type="button" className={classe} onClick={handleDeconnexion}>
+        Déconnexion
+      </button>
+    </>
   );
 }
 
