@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" role="img" aria-labelledby="t">
+  <title id="t">Plombier</title>
+  <rect width="600" height="400" fill="#f1f8fc"/>
+  <circle cx="70" cy="60" r="110" fill="#cd2c2e" opacity=".12"/>
+  <circle cx="545" cy="355" r="140" fill="#0074c7" opacity=".08"/>
+  <circle cx="520" cy="70" r="26" fill="#cd2c2e" opacity=".25"/>
+  <circle cx="300" cy="200" r="135" fill="#fff"/>
+  <path d="M190 150 H285 Q330 150 330 195 V235" fill="none" stroke="#0074c7" stroke-width="40"/>
+  <rect x="178" y="122" width="22" height="56" rx="5" fill="#00497c"/>
+  <rect x="302" y="226" width="56" height="22" rx="5" fill="#00497c"/>
+  <path d="M330 262 C 314 286 310 296 310 304 A20 20 0 0 0 350 304 C350 296 346 286 330 262 Z" fill="#5fb0e8"/>
+</svg>

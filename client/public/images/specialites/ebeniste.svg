@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" role="img" aria-labelledby="t">
+  <title id="t">Ébéniste</title>
+  <rect width="600" height="400" fill="#f1f8fc"/>
+  <circle cx="70" cy="60" r="110" fill="#00497c" opacity=".12"/>
+  <circle cx="545" cy="355" r="140" fill="#0074c7" opacity=".08"/>
+  <circle cx="520" cy="70" r="26" fill="#00497c" opacity=".25"/>
+  <circle cx="300" cy="200" r="135" fill="#fff"/>
+  <circle cx="300" cy="200" r="95" fill="#d9a066"/>
+  <g fill="none" stroke="#a8703c" stroke-width="6">
+    <circle cx="300" cy="200" r="72"/><circle cx="300" cy="200" r="50"/><circle cx="300" cy="200" r="28"/>
+  </g>
+  <circle cx="300" cy="200" r="95" fill="none" stroke="#7a4f2a" stroke-width="10"/>
+  <path d="M300 200 L372 150" stroke="#7a4f2a" stroke-width="6" stroke-linecap="round"/>
+</svg>

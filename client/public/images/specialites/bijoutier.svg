@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" role="img" aria-labelledby="t">
+  <title id="t">Bijoutier</title>
+  <rect width="600" height="400" fill="#f1f8fc"/>
+  <circle cx="70" cy="60" r="110" fill="#00497c" opacity=".12"/>
+  <circle cx="545" cy="355" r="140" fill="#0074c7" opacity=".08"/>
+  <circle cx="520" cy="70" r="26" fill="#00497c" opacity=".25"/>
+  <circle cx="300" cy="200" r="135" fill="#fff"/>
+  <g stroke="#fff" stroke-width="4" stroke-linejoin="round">
+    <path d="M232 160 L270 118 H330 L368 160 Z" fill="#5fb0e8"/>
+    <path d="M232 160 H368 L300 280 Z" fill="#0074c7"/>
+    <path d="M270 118 L285 160 L300 118 L315 160 L330 118 M285 160 L300 280 L315 160" fill="none"/>
+  </g>
+  <path d="M385 110 l6 14 l14 6 l-14 6 l-6 14 l-6 -14 l-14 -6 l14 -6 Z" fill="#f5a623"/>
+</svg>

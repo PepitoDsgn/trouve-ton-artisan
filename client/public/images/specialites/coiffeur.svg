@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" role="img" aria-labelledby="t">
+  <title id="t">Coiffeur</title>
+  <rect width="600" height="400" fill="#f1f8fc"/>
+  <circle cx="70" cy="60" r="110" fill="#82b864" opacity=".12"/>
+  <circle cx="545" cy="355" r="140" fill="#0074c7" opacity=".08"/>
+  <circle cx="520" cy="70" r="26" fill="#82b864" opacity=".25"/>
+  <circle cx="300" cy="200" r="135" fill="#fff"/>
+  <g stroke="#00497c" stroke-width="16" stroke-linecap="round">
+    <line x1="272" y1="238" x2="338" y2="112"/>
+    <line x1="328" y1="238" x2="262" y2="112"/>
+  </g>
+  <g fill="none" stroke="#0074c7" stroke-width="14">
+    <circle cx="258" cy="266" r="28"/><circle cx="342" cy="266" r="28"/>
+  </g>
+  <circle cx="300" cy="178" r="8" fill="#82b864"/>
+</svg>

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" role="img" aria-labelledby="t">
+  <title id="t">Charcutier</title>
+  <rect width="600" height="400" fill="#f1f8fc"/>
+  <circle cx="70" cy="60" r="110" fill="#f5a623" opacity=".12"/>
+  <circle cx="545" cy="355" r="140" fill="#0074c7" opacity=".08"/>
+  <circle cx="520" cy="70" r="26" fill="#f5a623" opacity=".25"/>
+  <circle cx="300" cy="200" r="135" fill="#fff"/>
+  <g transform="rotate(-25 300 200)">
+    <rect x="175" y="170" width="120" height="56" rx="28" fill="#cd2c2e"/>
+    <rect x="305" y="170" width="120" height="56" rx="28" fill="#cd2c2e"/>
+    <g fill="#fff" opacity=".5"><circle cx="210" cy="190" r="5"/><circle cx="250" cy="205" r="4"/><circle cx="345" cy="190" r="5"/><circle cx="385" cy="208" r="4"/></g>
+    <path d="M295 198 H305" stroke="#00497c" stroke-width="8" stroke-linecap="round"/>
+  </g>
+</svg>

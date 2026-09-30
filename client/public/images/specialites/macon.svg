@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" role="img" aria-labelledby="t">
+  <title id="t">Maçon</title>
+  <rect width="600" height="400" fill="#f1f8fc"/>
+  <circle cx="70" cy="60" r="110" fill="#cd2c2e" opacity=".12"/>
+  <circle cx="545" cy="355" r="140" fill="#0074c7" opacity=".08"/>
+  <circle cx="520" cy="70" r="26" fill="#cd2c2e" opacity=".25"/>
+  <circle cx="300" cy="200" r="135" fill="#fff"/>
+  <g fill="#0074c7">
+    <rect x="210" y="140" width="57" height="36" rx="4"/><rect x="271" y="140" width="57" height="36" rx="4"/><rect x="332" y="140" width="57" height="36" rx="4"/>
+    <rect x="210" y="180" width="27" height="36" rx="4"/><rect x="241" y="180" width="57" height="36" rx="4"/><rect x="302" y="180" width="57" height="36" rx="4"/><rect x="363" y="180" width="27" height="36" rx="4"/>
+    <rect x="210" y="220" width="57" height="36" rx="4"/><rect x="271" y="220" width="57" height="36" rx="4"/><rect x="332" y="220" width="57" height="36" rx="4"/>
+  </g>
+  <g transform="rotate(-35 330 110)">
+    <path d="M300 100 L360 100 L330 145 Z" fill="#cd2c2e"/>
+    <rect x="325" y="60" width="10" height="42" rx="4" fill="#00497c"/>
+  </g>
+</svg>

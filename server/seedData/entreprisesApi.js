@@ -15,18 +15,6 @@ const NAF_PAR_SPECIALITE = {
   Charcutier: '47.22Z',
 };
 
-const MOTS_CLES_IMAGE = {
-  Maçon: 'masonry,construction',
-  Électricien: 'electricity,wiring',
-  Plombier: 'pipe,plumbing',
-  Coiffeur: 'scissors,hair',
-  Fleuriste: 'florist,flowers',
-  Ébéniste: 'wood,workshop',
-  Bijoutier: 'jeweler,jewelry',
-  Boulanger: 'bakery,bread',
-  Charcutier: 'butcher,charcuterie',
-};
-
 const slugify = (texte) =>
   texte
     .toLowerCase()
@@ -81,7 +69,8 @@ async function fetchEntreprisesPourSpecialite(nomSpecialite, limite) {
         adresse: versCasseTitre(`${siege.numero_voie || ''} ${siege.libelle_voie || ''}`.trim() || siege.adresse),
         ville: versCasseTitre(siege.libelle_commune),
         codePostal: siege.code_postal,
-        image: `https://loremflickr.com/600/400/${MOTS_CLES_IMAGE[nomSpecialite]}?lock=${siege.siret}`,
+        // Illustration de la spécialité, servie par le client (client/public/images)
+        image: `/images/specialites/${slugify(nomSpecialite)}.svg`,
         artisanDuMois: false,
       };
     });

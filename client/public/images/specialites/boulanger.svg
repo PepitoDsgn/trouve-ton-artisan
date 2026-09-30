@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" role="img" aria-labelledby="t">
+  <title id="t">Boulanger</title>
+  <rect width="600" height="400" fill="#f1f8fc"/>
+  <circle cx="70" cy="60" r="110" fill="#f5a623" opacity=".12"/>
+  <circle cx="545" cy="355" r="140" fill="#0074c7" opacity=".08"/>
+  <circle cx="520" cy="70" r="26" fill="#f5a623" opacity=".25"/>
+  <circle cx="300" cy="200" r="135" fill="#fff"/>
+  <g transform="rotate(-20 300 200)">
+    <ellipse cx="300" cy="200" rx="125" ry="46" fill="#e0a458"/>
+    <g fill="none" stroke="#a8703c" stroke-width="8" stroke-linecap="round">
+      <path d="M220 185 q15 20 35 25"/><path d="M270 180 q15 20 35 25"/><path d="M320 180 q15 20 35 25"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" role="img" aria-labelledby="t">
+  <title id="t">Électricien</title>
+  <rect width="600" height="400" fill="#f1f8fc"/>
+  <circle cx="70" cy="60" r="110" fill="#cd2c2e" opacity=".12"/>
+  <circle cx="545" cy="355" r="140" fill="#0074c7" opacity=".08"/>
+  <circle cx="520" cy="70" r="26" fill="#cd2c2e" opacity=".25"/>
+  <circle cx="300" cy="200" r="135" fill="#fff"/>
+  <path d="M325 95 L232 215 L292 215 L268 310 L372 180 L310 180 L338 95 Z" fill="#f5a623" stroke="#00497c" stroke-width="8" stroke-linejoin="round"/>
+</svg>
