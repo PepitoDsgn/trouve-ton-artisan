@@ -1,48 +1,15 @@
-import { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, Navigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { getArtisan, sendContact } from '../services/api';
 import Toast from '../components/Toast';
+import useArtisan from '../hooks/useArtisan';
+import useContactForm from '../hooks/useContactForm';
 
 function DetailArtisan() {
   const { id } = useParams();
-  const navigate = useNavigate();
-  const [artisan, setArtisan] = useState(null);
-  const [form, setForm] = useState({ nom: '', email: '', objet: '', message: '' });
-  const [statut, setStatut] = useState(null);
+  const { artisan, notFound } = useArtisan(id);
+  const { form, statut, handleChange, handleSubmit, resetStatut } = useContactForm(id);
 
-  useEffect(() => {
-    getArtisan(id).then((data) => {
-      setArtisan(data);
-    }).catch(() => navigate('/404', { replace: true }));
-  }, [id, navigate]);
-
-  const handleChange = (event) => {
-    setForm((previous) => ({ ...previous, [event.target.name]: event.target.value }));
-  };
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!form.nom.trim() || !form.email.trim() || !form.message.trim()) {
-      setStatut('validation');
-      return;
-    }
-    if (!emailRegex.test(form.email)) {
-      setStatut('emailInvalid');
-      return;
-    }
-
-    try {
-      await sendContact(id, form);
-      setStatut('success');
-      setForm({ nom: '', email: '', objet: '', message: '' });
-    } catch {
-      setStatut('error');
-    }
-  };
-
+  if (notFound) return <Navigate to="/404" replace />;
   if (!artisan) return <div className="container py-5 text-center">Chargement...</div>;
 
   return (
@@ -144,28 +111,28 @@ function DetailArtisan() {
           <Toast
             message="Votre message a bien été envoyé. Une réponse vous sera apportée sous 48h."
             type="success"
-            onClose={() => setStatut(null)}
+            onClose={resetStatut}
           />
         )}
         {statut === 'validation' && (
           <Toast
             message="Veuillez remplir les champs nom, email et message."
             type="warning"
-            onClose={() => setStatut(null)}
+            onClose={resetStatut}
           />
         )}
         {statut === 'emailInvalid' && (
           <Toast
             message="L'adresse email saisie n'est pas valide."
             type="warning"
-            onClose={() => setStatut(null)}
+            onClose={resetStatut}
           />
         )}
         {statut === 'error' && (
           <Toast
             message="Une erreur est survenue. Veuillez réessayer."
             type="error"
-            onClose={() => setStatut(null)}
+            onClose={resetStatut}
           />
         )}
 

@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import logo from '../assets/logo.png';
-import { getCategories } from '../services/api';
+import useCategories from '../hooks/useCategories';
 
 function BurgerIcon({ open }) {
   return (
@@ -14,7 +14,7 @@ function BurgerIcon({ open }) {
 }
 
 function Navbar() {
-  const [categories, setCategories] = useState([]);
+  const categories = useCategories();
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -22,10 +22,6 @@ function Navbar() {
   const categorieActive = searchParams.get('categorie')
     ? Number(searchParams.get('categorie'))
     : null;
-
-  useEffect(() => {
-    getCategories().then(setCategories);
-  }, []);
 
   const handleCategorie = (id) => {
     setMenuOpen(false);

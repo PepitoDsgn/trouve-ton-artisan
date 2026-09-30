@@ -1,7 +1,6 @@
-import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import ArtisanCard from '../components/ArtisanCard';
-import { getArtisansDuMois } from '../services/api';
+import useArtisansDuMois from '../hooks/useArtisansDuMois';
 
 const etapes = [
   { num: 1, texte: "Choisir une Catégorie d'Artisan dans le menu" },
@@ -11,11 +10,7 @@ const etapes = [
 ];
 
 function Accueil() {
-  const [artisansDuMois, setArtisansDuMois] = useState([]);
-
-  useEffect(() => {
-    getArtisansDuMois().then(setArtisansDuMois);
-  }, []);
+  const artisansDuMois = useArtisansDuMois();
 
   return (
     <>

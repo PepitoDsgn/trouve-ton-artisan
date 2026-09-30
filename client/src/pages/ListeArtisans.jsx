@@ -1,53 +1,20 @@
-import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import ArtisanCard from '../components/ArtisanCard';
-import { getArtisans, getCategories } from '../services/api';
-
-const titresCategorie = {
-  Bâtiment: 'Les Artisans du Bâtiment',
-  Services: 'Les Artisans du Service',
-  Fabrication: 'Les Artisans en Fabrication',
-  Alimentation: "Les Artisans de l'Alimentaire",
-};
+import useArtisans from '../hooks/useArtisans';
+import useCategories from '../hooks/useCategories';
+import { getTitreListe } from '../utils/titreListe';
 
 function ListeArtisans() {
   const [searchParams] = useSearchParams();
-  const [artisans, setArtisans] = useState([]);
-  const [titre, setTitre] = useState('Nos Artisans');
-  const [loading, setLoading] = useState(true);
-
   const categorieId = searchParams.get('categorie');
   const recherche = searchParams.get('recherche');
 
-  useEffect(() => {
-    setLoading(true);
-    const params = {};
-    if (categorieId) params.categorie = categorieId;
-    if (recherche) params.recherche = recherche;
+  const { artisans, loading } = useArtisans({ categorie: categorieId, recherche });
+  const categories = useCategories();
 
-    getArtisans(params).then((data) => {
-      setArtisans(data);
-      setLoading(false);
-    });
-  }, [categorieId, recherche]);
-
-  useEffect(() => {
-    if (categorieId) {
-      getCategories().then((categories) => {
-        const categorie = categories.find((element) => element.id === Number(categorieId));
-        if (categorie) {
-          const nouveauTitre = titresCategorie[categorie.nom] || `Les Artisans – ${categorie.nom}`;
-          setTitre(nouveauTitre);
-        }
-      });
-    } else {
-      const nouveauTitre = recherche
-        ? `Résultats pour "${recherche}"`
-        : 'Nos Artisans';
-      setTitre(nouveauTitre);
-    }
-  }, [categorieId, recherche]);
+  const categorie = categories.find((element) => element.id === Number(categorieId));
+  const titre = getTitreListe({ categorieId, categorie, recherche });
 
   return (
     <div className="container py-5">
