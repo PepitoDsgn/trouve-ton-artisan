@@ -53,3 +53,31 @@ CREATE TABLE artisans (
     FOREIGN KEY (specialiteId) REFERENCES specialites(id)
     ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Table des utilisateurs (membres et administrateurs)
+-- Le mot de passe est stocké haché avec bcrypt (60 caractères), jamais en clair.
+CREATE TABLE utilisateurs (
+  id          INT                   NOT NULL AUTO_INCREMENT,
+  email       VARCHAR(255)          NOT NULL,
+  motDePasse  VARCHAR(60)           NOT NULL,
+  role        ENUM('user', 'admin') NOT NULL DEFAULT 'user',
+  createdAt   DATETIME              NOT NULL,
+  updatedAt   DATETIME              NOT NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY uq_utilisateur_email (email)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Table de liaison des favoris (un utilisateur ↔ plusieurs artisans)
+CREATE TABLE favoris (
+  utilisateurId  INT       NOT NULL,
+  artisanId      INT       NOT NULL,
+  createdAt      DATETIME  NOT NULL,
+  PRIMARY KEY (utilisateurId, artisanId),
+  INDEX idx_favori_artisan (artisanId),
+  CONSTRAINT fk_favori_utilisateur
+    FOREIGN KEY (utilisateurId) REFERENCES utilisateurs(id)
+    ON DELETE CASCADE,
+  CONSTRAINT fk_favori_artisan
+    FOREIGN KEY (artisanId) REFERENCES artisans(id)
+    ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
