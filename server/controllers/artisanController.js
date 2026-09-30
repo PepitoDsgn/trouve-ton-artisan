@@ -1,33 +1,9 @@
-const { Op } = require('sequelize');
-const { Artisan, Specialite, Categorie } = require('../models');
+const artisanService = require('../services/artisanService');
 
 const getAllArtisans = async (req, res, next) => {
   try {
     const { categorie, recherche } = req.query;
-
-    const where = {};
-    if (recherche) {
-      where.nom = { [Op.like]: `%${recherche}%` };
-    }
-
-    const specialiteInclude = {
-      model: Specialite,
-      required: Boolean(categorie),
-      include: [
-        {
-          model: Categorie,
-          ...(categorie ? { where: { id: categorie }, required: true } : {}),
-        },
-      ],
-    };
-
-    const artisans = await Artisan.findAll({
-      where,
-      include: [specialiteInclude],
-      order: [['nom', 'ASC']],
-      subQuery: false,
-    });
-
+    const artisans = await artisanService.findAllArtisans({ categorie, recherche });
     res.json(artisans);
   } catch (error) {
     next(error);
@@ -36,9 +12,7 @@ const getAllArtisans = async (req, res, next) => {
 
 const getArtisanById = async (req, res, next) => {
   try {
-    const artisan = await Artisan.findByPk(req.params.id, {
-      include: [{ model: Specialite, include: [Categorie] }],
-    });
+    const artisan = await artisanService.findArtisanById(req.params.id);
 
     if (!artisan) {
       return res.status(404).json({ message: 'Artisan introuvable' });
@@ -52,12 +26,7 @@ const getArtisanById = async (req, res, next) => {
 
 const getArtisansDuMois = async (req, res, next) => {
   try {
-    const artisans = await Artisan.findAll({
-      where: { artisanDuMois: true },
-      include: [{ model: Specialite, include: [Categorie] }],
-      limit: 3,
-    });
-
+    const artisans = await artisanService.findArtisansDuMois();
     res.json(artisans);
   } catch (error) {
     next(error);

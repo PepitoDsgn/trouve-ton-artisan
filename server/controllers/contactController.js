@@ -1,6 +1,5 @@
 const { validationResult } = require('express-validator');
-const { Artisan } = require('../models');
-const transporter = require('../config/mailer');
+const contactService = require('../services/contactService');
 
 const sendContactMessage = async (req, res, next) => {
   try {
@@ -10,22 +9,13 @@ const sendContactMessage = async (req, res, next) => {
     }
 
     const { nom, email, objet, message } = req.body;
+    const sent = await contactService.sendContactMessage(req.params.id, { nom, email, objet, message });
 
-    const artisan = await Artisan.findByPk(req.params.id);
-
-    if (!artisan) {
+    if (!sent) {
       return res.status(404).json({ message: 'Artisan introuvable' });
     }
 
     res.status(200).json({ message: 'Votre message a bien été envoyé' });
-
-    transporter.sendMail({
-      from: process.env.EMAIL_USER,
-      to: artisan.email,
-      replyTo: email,
-      subject: objet || `Nouveau message de ${nom} via Trouve ton artisan`,
-      text: `${message}\n\nContact : ${nom} (${email})`,
-    }).catch((err) => console.error('Erreur envoi email :', err.message));
   } catch (error) {
     next(error);
   }
