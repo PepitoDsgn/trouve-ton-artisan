@@ -7,6 +7,7 @@ const { sequelize } = require('./models');
 const authRoutes = require('./routes/authRoutes');
 const artisanRoutes = require('./routes/artisanRoutes');
 const categorieRoutes = require('./routes/categorieRoutes');
+const favoriRoutes = require('./routes/favoriRoutes');
 const notFound = require('./middlewares/notFound');
 const errorHandler = require('./middlewares/errorHandler');
 
@@ -27,6 +28,7 @@ app.get('/', (req, res) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/artisans', artisanRoutes);
 app.use('/api/categories', categorieRoutes);
+app.use('/api/favoris', favoriRoutes);
 
 app.use(notFound);
 app.use(errorHandler);

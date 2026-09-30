@@ -7,6 +7,7 @@ const {
 } = require('../controllers/artisanController');
 const { sendContactMessage } = require('../controllers/contactController');
 const { contactLimiter } = require('../middlewares/rateLimiter');
+const { requireAuth } = require('../middlewares/auth');
 
 const router = express.Router();
 
@@ -16,6 +17,9 @@ const contactValidation = [
   body('objet').optional({ checkFalsy: true }).trim().isLength({ max: 150 }),
   body('message').trim().notEmpty().withMessage('Le message est obligatoire').isLength({ max: 2000 }),
 ];
+
+// Toutes les routes artisans sont réservées aux membres connectés
+router.use(requireAuth);
 
 router.get('/du-mois', getArtisansDuMois);
 router.get('/:id', getArtisanById);
