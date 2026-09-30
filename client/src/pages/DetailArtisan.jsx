@@ -3,11 +3,13 @@ import { Helmet } from 'react-helmet-async';
 import Toast from '../components/Toast';
 import useArtisan from '../hooks/useArtisan';
 import useContactForm from '../hooks/useContactForm';
+import useAuth from '../hooks/useAuth';
 
 function DetailArtisan() {
   const { id } = useParams();
+  const { utilisateur } = useAuth();
   const { artisan, notFound } = useArtisan(id);
-  const { form, statut, handleChange, handleSubmit, resetStatut } = useContactForm(id);
+  const { form, statut, handleChange, handleSubmit, resetStatut } = useContactForm(id, utilisateur.email);
 
   if (notFound) return <Navigate to="/404" replace />;
   if (!artisan) return <div className="container py-5 text-center">Chargement...</div>;

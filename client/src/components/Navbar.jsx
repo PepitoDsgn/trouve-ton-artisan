@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import logo from '../assets/logo.png';
 import useCategories from '../hooks/useCategories';
+import MenuCompte from './MenuCompte';
 
 function BurgerIcon({ open }) {
   return (
@@ -49,7 +50,7 @@ function Navbar() {
         </a>
 
         {/* Desktop nav */}
-        <div className="d-none d-md-flex gap-2">
+        <div className="d-none d-lg-flex gap-2 align-items-center">
           {categories.map((cat) => (
             <button
               key={cat.id}
@@ -60,11 +61,13 @@ function Navbar() {
               {cat.nom}
             </button>
           ))}
+          <span className="navbar-separateur" aria-hidden="true" />
+          <MenuCompte variante="desktop" />
         </div>
 
         {/* Burger button */}
         <button
-          className="d-md-none burger-btn"
+          className="d-lg-none burger-btn"
           aria-label={menuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
           aria-expanded={menuOpen}
           onClick={() => setMenuOpen((isOpen) => !isOpen)}
@@ -74,7 +77,7 @@ function Navbar() {
       </div>
 
       {/* Mobile menu déroulant */}
-      <div className={`mobile-menu${menuOpen ? ' open' : ''}`}>
+      <div className={`mobile-menu d-lg-none${menuOpen ? ' open' : ''}`}>
         <div className="mobile-menu-inner">
           {categories.map((cat) => (
             <button
@@ -86,6 +89,7 @@ function Navbar() {
               {cat.nom}
             </button>
           ))}
+          <MenuCompte variante="mobile" onNavigate={() => setMenuOpen(false)} />
         </div>
       </div>
     </nav>

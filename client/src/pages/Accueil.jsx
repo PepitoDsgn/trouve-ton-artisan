@@ -1,6 +1,8 @@
+import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import ArtisanCard from '../components/ArtisanCard';
 import useArtisansDuMois from '../hooks/useArtisansDuMois';
+import useAuth from '../hooks/useAuth';
 
 const etapes = [
   { num: 1, texte: "Choisir une Catégorie d'Artisan dans le menu" },
@@ -10,7 +12,8 @@ const etapes = [
 ];
 
 function Accueil() {
-  const artisansDuMois = useArtisansDuMois();
+  const { utilisateur, chargement } = useAuth();
+  const artisansDuMois = useArtisansDuMois(Boolean(utilisateur));
 
   return (
     <>
@@ -59,6 +62,23 @@ function Accueil() {
           <h2 id="artisans-du-mois" className="section-title mb-4">
             Les Artisans du mois
           </h2>
+
+          {!chargement && !utilisateur && (
+            <div className="invitation-connexion text-center">
+              <p className="mb-4">
+                Connectez-vous pour découvrir les artisans du mois et contacter
+                les artisans de votre région.
+              </p>
+              <div className="d-flex flex-wrap justify-content-center gap-3">
+                <Link to="/connexion" className="btn btn-primary rounded-pill px-4 py-2 fw-bold">
+                  Se connecter
+                </Link>
+                <Link to="/inscription" className="btn btn-outline-primary rounded-pill px-4 py-2 fw-bold">
+                  Créer un compte
+                </Link>
+              </div>
+            </div>
+          )}
 
           {/* Desktop (≥992px) : grille 3 colonnes */}
           <div className="d-none d-lg-block">
