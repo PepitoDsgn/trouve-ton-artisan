@@ -14,7 +14,7 @@ const seed = async () => {
     { nom: 'Alimentation' },
   ]);
 
-  const getCategorieId = (nom) => categories.find((c) => c.nom === nom).id;
+  const getCategorieId = (nom) => categories.find((categorie) => categorie.nom === nom).id;
 
   const specialites = await Specialite.bulkCreate([
     { nom: 'Maçon', categorieId: getCategorieId('Bâtiment') },
@@ -28,7 +28,7 @@ const seed = async () => {
     { nom: 'Charcutier', categorieId: getCategorieId('Alimentation') },
   ]);
 
-  const getSpecialiteId = (nom) => specialites.find((s) => s.nom === nom).id;
+  const getSpecialiteId = (nom) => specialites.find((specialite) => specialite.nom === nom).id;
 
   await Artisan.bulkCreate([
     {
