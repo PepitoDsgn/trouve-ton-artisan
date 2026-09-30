@@ -1,14 +1,25 @@
 const { Artisan } = require('../models');
+const Message = require('../models/mongo/message');
 const transporter = require('../config/mailer');
 
-// Retourne false si l'artisan n'existe pas. L'email part en arrière-plan :
-// un échec SMTP est journalisé sans bloquer la réponse au visiteur.
-const sendContactMessage = async (artisanId, { nom, email, objet, message }) => {
+// Retourne false si l'artisan n'existe pas. Le message est d'abord enregistré
+// dans MongoDB ; l'email part ensuite en arrière-plan : un échec SMTP est
+// journalisé sans bloquer la réponse au visiteur, et le message reste consultable.
+const sendContactMessage = async (artisanId, utilisateurId, { nom, email, objet, message }) => {
   const artisan = await Artisan.findByPk(artisanId);
 
   if (!artisan) {
     return false;
   }
+
+  await Message.create({
+    artisan: { id: artisan.id, nom: artisan.nom },
+    utilisateurId,
+    nom,
+    email,
+    objet,
+    message,
+  });
 
   transporter.sendMail({
     from: process.env.EMAIL_USER,

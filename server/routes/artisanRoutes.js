@@ -8,6 +8,7 @@ const {
 const { sendContactMessage } = require('../controllers/contactController');
 const { contactLimiter } = require('../middlewares/rateLimiter');
 const { requireAuth } = require('../middlewares/auth');
+const validate = require('../middlewares/validate');
 
 const router = express.Router();
 
@@ -24,6 +25,6 @@ router.use(requireAuth);
 router.get('/du-mois', getArtisansDuMois);
 router.get('/:id', getArtisanById);
 router.get('/', getAllArtisans);
-router.post('/:id/contact', contactLimiter, contactValidation, sendContactMessage);
+router.post('/:id/contact', contactLimiter, contactValidation, validate, sendContactMessage);
 
 module.exports = router;

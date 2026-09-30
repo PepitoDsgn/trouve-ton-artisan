@@ -4,6 +4,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 const { sequelize } = require('./models');
+const { mongoose, connectMongo } = require('./config/mongo');
 const authRoutes = require('./routes/authRoutes');
 const artisanRoutes = require('./routes/artisanRoutes');
 const categorieRoutes = require('./routes/categorieRoutes');
@@ -38,7 +39,8 @@ const PORT = process.env.PORT || 5000;
 app.get('/health', async (_req, res) => {
   try {
     await sequelize.authenticate();
-    res.json({ status: 'ok', db: 'connected' });
+    const mongo = mongoose.connection.readyState === 1 ? 'connected' : 'disconnected';
+    res.json({ status: 'ok', db: 'connected', mongo });
   } catch (err) {
     res.status(503).json({ status: 'error', db: err.message });
   }
@@ -58,4 +60,5 @@ app.listen(PORT, '0.0.0.0', () => {
     .authenticate()
     .then(() => console.log('Connexion à la base de données réussie'))
     .catch((err) => console.error('Erreur DB :', err.message));
+  connectMongo();
 });
