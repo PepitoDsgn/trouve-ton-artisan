@@ -31,11 +31,6 @@ app.use('/api/artisans', artisanRoutes);
 app.use('/api/categories', categorieRoutes);
 app.use('/api/favoris', favoriRoutes);
 
-app.use(notFound);
-app.use(errorHandler);
-
-const PORT = process.env.PORT || 5000;
-
 app.get('/health', async (_req, res) => {
   try {
     await sequelize.authenticate();
@@ -45,6 +40,11 @@ app.get('/health', async (_req, res) => {
     res.status(503).json({ status: 'error', db: err.message });
   }
 });
+
+app.use(notFound);
+app.use(errorHandler);
+
+const PORT = process.env.PORT || 5000;
 
 process.on('unhandledRejection', (reason) => {
   console.error('Unhandled Rejection:', reason);
