@@ -34,18 +34,18 @@ function ListeArtisans() {
 
   useEffect(() => {
     if (categorieId) {
-      getCategories().then((data) => {
-        const cat = data.find((c) => c.id === Number(categorieId));
-        if (cat) {
-          const t = titresCategorie[cat.nom] || `Les Artisans – ${cat.nom}`;
-          setTitre(t);
+      getCategories().then((categories) => {
+        const categorie = categories.find((element) => element.id === Number(categorieId));
+        if (categorie) {
+          const nouveauTitre = titresCategorie[categorie.nom] || `Les Artisans – ${categorie.nom}`;
+          setTitre(nouveauTitre);
         }
       });
     } else {
-      const t = recherche
+      const nouveauTitre = recherche
         ? `Résultats pour "${recherche}"`
         : 'Nos Artisans';
-      setTitre(t);
+      setTitre(nouveauTitre);
     }
   }, [categorieId, recherche]);
 
@@ -69,9 +69,9 @@ function ListeArtisans() {
           {/* Desktop (≥992px) : grille 4 colonnes */}
           <div className="d-none d-lg-block">
             <div className="row g-4">
-              {artisans.map((a) => (
-                <div key={a.id} className="col-lg-3">
-                  <ArtisanCard artisan={a} />
+              {artisans.map((artisan) => (
+                <div key={artisan.id} className="col-lg-3">
+                  <ArtisanCard artisan={artisan} />
                 </div>
               ))}
             </div>
@@ -80,9 +80,9 @@ function ListeArtisans() {
           {/* Tablette (768-991px) : grille 2 colonnes */}
           <div className="d-none d-md-block d-lg-none">
             <div className="row g-4">
-              {artisans.map((a) => (
-                <div key={a.id} className="col-6">
-                  <ArtisanCard artisan={a} />
+              {artisans.map((artisan) => (
+                <div key={artisan.id} className="col-6">
+                  <ArtisanCard artisan={artisan} />
                 </div>
               ))}
             </div>
@@ -90,8 +90,8 @@ function ListeArtisans() {
 
           {/* Mobile (<768px) : scroll horizontal natif */}
           <div className="d-md-none artisans-carousel" aria-label="Liste des artisans">
-            {artisans.map((a) => (
-              <ArtisanCard key={a.id} artisan={a} />
+            {artisans.map((artisan) => (
+              <ArtisanCard key={artisan.id} artisan={artisan} />
             ))}
           </div>
         </>

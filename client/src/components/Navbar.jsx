@@ -32,8 +32,8 @@ function Navbar() {
     navigate(`/artisans?categorie=${id}`);
   };
 
-  const handleAccueil = (e) => {
-    e.preventDefault();
+  const handleAccueil = (event) => {
+    event.preventDefault();
     setMenuOpen(false);
     navigate('/');
   };
@@ -71,7 +71,7 @@ function Navbar() {
           className="d-md-none burger-btn"
           aria-label={menuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
           aria-expanded={menuOpen}
-          onClick={() => setMenuOpen((o) => !o)}
+          onClick={() => setMenuOpen((isOpen) => !isOpen)}
         >
           <BurgerIcon open={menuOpen} />
         </button>

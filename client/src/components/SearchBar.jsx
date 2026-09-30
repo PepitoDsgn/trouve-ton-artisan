@@ -10,8 +10,8 @@ function SearchBar() {
     setValeur(searchParams.get('recherche') || '');
   }, [searchParams]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = (event) => {
+    event.preventDefault();
     const params = new URLSearchParams(searchParams);
     if (valeur.trim()) {
       params.set('recherche', valeur.trim());
@@ -33,7 +33,7 @@ function SearchBar() {
           className="searchbar-input"
           placeholder="🔍  Rechercher un Artisan..."
           value={valeur}
-          onChange={(e) => setValeur(e.target.value)}
+          onChange={(event) => setValeur(event.target.value)}
           aria-label="Rechercher un artisan"
         />
       </form>

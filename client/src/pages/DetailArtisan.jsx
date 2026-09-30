@@ -17,12 +17,12 @@ function DetailArtisan() {
     }).catch(() => navigate('/404', { replace: true }));
   }, [id, navigate]);
 
-  const handleChange = (e) => {
-    setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
+  const handleChange = (event) => {
+    setForm((previous) => ({ ...previous, [event.target.name]: event.target.value }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!form.nom.trim() || !form.email.trim() || !form.message.trim()) {

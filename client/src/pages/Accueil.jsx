@@ -35,10 +35,10 @@ function Accueil() {
           {/* Desktop / tablette : grands chiffres */}
           <div className="d-none d-sm-block mb-5">
             <div className="row text-center">
-              {etapes.map((e) => (
-                <div key={e.num} className="col-6 col-md-3">
-                  <div className="how-to-number">{e.num}</div>
-                  <p className="mt-2" style={{ fontSize: '0.9rem' }}>{e.texte}</p>
+              {etapes.map((etape) => (
+                <div key={etape.num} className="col-6 col-md-3">
+                  <div className="how-to-number">{etape.num}</div>
+                  <p className="mt-2" style={{ fontSize: '0.9rem' }}>{etape.texte}</p>
                 </div>
               ))}
             </div>
@@ -50,10 +50,10 @@ function Accueil() {
               className="p-4 rounded-4"
               style={{ background: '#f1f8fc', fontSize: '0.95rem' }}
             >
-              {etapes.map((e) => (
-                <p key={e.num} className={e.num < 4 ? 'mb-4' : 'mb-0'}>
-                  <strong style={{ color: '#0074c7' }}>{e.num}.</strong>{' '}
-                  {e.texte}
+              {etapes.map((etape) => (
+                <p key={etape.num} className={etape.num < 4 ? 'mb-4' : 'mb-0'}>
+                  <strong style={{ color: '#0074c7' }}>{etape.num}.</strong>{' '}
+                  {etape.texte}
                 </p>
               ))}
             </div>
@@ -68,9 +68,9 @@ function Accueil() {
           {/* Desktop (≥992px) : grille 3 colonnes */}
           <div className="d-none d-lg-block">
             <div className="row g-4 justify-content-center">
-              {artisansDuMois.map((a) => (
-                <div key={a.id} className="col-lg-4">
-                  <ArtisanCard artisan={a} />
+              {artisansDuMois.map((artisan) => (
+                <div key={artisan.id} className="col-lg-4">
+                  <ArtisanCard artisan={artisan} />
                 </div>
               ))}
             </div>
@@ -78,8 +78,8 @@ function Accueil() {
 
           {/* Mobile + tablette (<992px) : scroll horizontal natif */}
           <div className="d-lg-none artisans-carousel" aria-label="Artisans du mois">
-            {artisansDuMois.map((a) => (
-              <ArtisanCard key={a.id} artisan={a} />
+            {artisansDuMois.map((artisan) => (
+              <ArtisanCard key={artisan.id} artisan={artisan} />
             ))}
           </div>
         </section>
