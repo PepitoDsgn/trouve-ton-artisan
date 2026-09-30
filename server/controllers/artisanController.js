@@ -33,8 +33,48 @@ const getArtisansDuMois = async (req, res, next) => {
   }
 };
 
+const createArtisan = async (req, res, next) => {
+  try {
+    const artisan = await artisanService.creerArtisan(req.body);
+    res.status(201).json(artisan);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const updateArtisan = async (req, res, next) => {
+  try {
+    const artisan = await artisanService.modifierArtisan(req.params.id, req.body);
+
+    if (!artisan) {
+      return res.status(404).json({ message: 'Artisan introuvable' });
+    }
+
+    res.json(artisan);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const deleteArtisan = async (req, res, next) => {
+  try {
+    const supprime = await artisanService.supprimerArtisan(req.params.id);
+
+    if (!supprime) {
+      return res.status(404).json({ message: 'Artisan introuvable' });
+    }
+
+    res.status(204).end();
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   getAllArtisans,
   getArtisanById,
   getArtisansDuMois,
+  createArtisan,
+  updateArtisan,
+  deleteArtisan,
 };

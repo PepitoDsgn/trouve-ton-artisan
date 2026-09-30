@@ -9,6 +9,7 @@ const authRoutes = require('./routes/authRoutes');
 const artisanRoutes = require('./routes/artisanRoutes');
 const categorieRoutes = require('./routes/categorieRoutes');
 const favoriRoutes = require('./routes/favoriRoutes');
+const adminRoutes = require('./routes/adminRoutes');
 const notFound = require('./middlewares/notFound');
 const errorHandler = require('./middlewares/errorHandler');
 
@@ -30,6 +31,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/artisans', artisanRoutes);
 app.use('/api/categories', categorieRoutes);
 app.use('/api/favoris', favoriRoutes);
+app.use('/api/admin', adminRoutes);
 
 app.get('/health', async (_req, res) => {
   try {
