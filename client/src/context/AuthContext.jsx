@@ -4,6 +4,7 @@ import {
   deconnexion as apiDeconnexion,
   getMoi,
   inscription as apiInscription,
+  supprimerMonCompte,
   surSessionExpiree,
 } from '../services/api';
 
@@ -40,9 +41,14 @@ export function AuthProvider({ children }) {
     setUtilisateur(null);
   }, []);
 
+  const supprimerCompte = useCallback(async (motDePasse) => {
+    await supprimerMonCompte(motDePasse);
+    setUtilisateur(null);
+  }, []);
+
   const value = useMemo(
-    () => ({ utilisateur, chargement, connexion, inscription, deconnexion }),
-    [utilisateur, chargement, connexion, inscription, deconnexion]
+    () => ({ utilisateur, chargement, connexion, inscription, deconnexion, supprimerCompte }),
+    [utilisateur, chargement, connexion, inscription, deconnexion, supprimerCompte]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

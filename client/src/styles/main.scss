@@ -400,6 +400,50 @@ main {
   }
 }
 
+// Mon compte
+.texte-erreur {
+  color: $red-accent;
+  font-weight: 600;
+}
+
+.compte-sections {
+  max-width: 720px;
+  margin: 0 auto;
+  display: grid;
+  gap: 20px;
+}
+
+.compte-section {
+  background: $bg-light;
+  border-radius: 16px;
+  padding: 24px;
+
+  h2 {
+    color: $primary-dark;
+    font-weight: 700;
+  }
+
+  &.compte-danger {
+    border: 2px solid $red-accent;
+    background: #fff;
+  }
+}
+
+// Pages légales
+.page-legale {
+  max-width: 820px;
+
+  section {
+    margin-bottom: 32px;
+  }
+
+  h2 {
+    color: $primary-dark;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+}
+
 // Espace admin
 .admin-nav {
   display: flex;

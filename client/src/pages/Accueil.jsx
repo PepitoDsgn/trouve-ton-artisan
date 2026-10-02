@@ -1,8 +1,10 @@
-import { Link } from 'react-router-dom';
+import { useCallback, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import ArtisanCard from '../components/ArtisanCard';
 import useArtisansDuMois from '../hooks/useArtisansDuMois';
 import useAuth from '../hooks/useAuth';
+import Toast from '../components/Toast';
 
 const etapes = [
   { num: 1, texte: "Choisir une Catégorie d'Artisan dans le menu" },
@@ -13,6 +15,9 @@ const etapes = [
 
 function Accueil() {
   const { utilisateur, chargement } = useAuth();
+  const location = useLocation();
+  const [compteSupprime, setCompteSupprime] = useState(Boolean(location.state?.compteSupprime));
+  const fermerToast = useCallback(() => setCompteSupprime(false), []);
   const artisansDuMois = useArtisansDuMois(Boolean(utilisateur));
 
   return (
@@ -24,6 +29,13 @@ function Accueil() {
           content="Trouvez facilement un artisan près de chez vous en Auvergne-Rhône-Alpes : bâtiment, services, fabrication, alimentation. Contactez-le en quelques clics."
         />
       </Helmet>
+      {compteSupprime && (
+        <Toast
+          message="Votre compte et vos données ont été supprimés."
+          type="success"
+          onClose={fermerToast}
+        />
+      )}
       <div className="container py-5">
         <section aria-labelledby="comment-trouver">
           <h1 id="comment-trouver" className="section-title mb-5">

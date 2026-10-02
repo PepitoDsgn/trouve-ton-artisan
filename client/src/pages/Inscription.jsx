@@ -79,6 +79,12 @@ function Inscription() {
             />
           </div>
 
+          <p className="auth-aide mb-4">
+            Votre email sert uniquement à vous connecter. Vous pouvez supprimer votre compte
+            à tout moment.{' '}
+            <Link to="/donnees-personnelles" className="text-white">En savoir plus</Link>
+          </p>
+
           <div className="text-center">
             <button type="submit" className="btn-envoyer" disabled={envoi}>
               {envoi ? 'Création...' : 'Créer mon compte'}

@@ -27,6 +27,9 @@ function MenuCompte({ variante, onNavigate }) {
       <NavLink to="/favoris" className={classe} onClick={onNavigate}>
         Mes favoris
       </NavLink>
+      <NavLink to="/compte" className={classe} onClick={onNavigate}>
+        Mon compte
+      </NavLink>
       {utilisateur.role === 'admin' && (
         <NavLink to="/admin" className={classe} onClick={onNavigate}>
           Admin

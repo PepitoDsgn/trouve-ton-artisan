@@ -1,4 +1,4 @@
-import { useParams, Navigate } from 'react-router-dom';
+import { Link, useParams, Navigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import Toast from '../components/Toast';
 import BoutonFavori from '../components/BoutonFavori';
@@ -145,7 +145,7 @@ function DetailArtisan() {
           />
         )}
 
-        <form onSubmit={handleSubmit} className="contact-form-section">
+        <form onSubmit={handleSubmit} className="contact-form-section" aria-describedby="mention-contact">
           <div className="row g-3">
             <div className="col-md-6">
               <div className="mb-3">
@@ -205,6 +205,10 @@ function DetailArtisan() {
                 />
               </div>
             </div>
+            <p id="mention-contact" className="col-12 small mb-0">
+              Votre message est transmis à l'artisan par email et conservé 12 mois.{' '}
+              <Link to="/donnees-personnelles" className="text-white">En savoir plus</Link>
+            </p>
             <div className="col-12 d-md-none text-center">
               <button type="submit" className="btn-envoyer">
                 Envoyer

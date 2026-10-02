@@ -51,6 +51,13 @@ export const deconnexion = () => api.post('/auth/deconnexion');
 export const getMoi = () =>
   api.get('/auth/moi').then((response) => response.data.utilisateur);
 
+// Fichier JSON de toutes les données du compte (droit d'accès RGPD)
+export const getMesDonnees = () =>
+  api.get('/auth/moi/donnees', { responseType: 'blob' }).then((response) => response.data);
+
+export const supprimerMonCompte = (motDePasse) =>
+  api.delete('/auth/moi', { data: { motDePasse } });
+
 export const getFavoris = () =>
   api.get('/favoris').then((response) => response.data);
 

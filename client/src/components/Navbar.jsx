@@ -50,7 +50,7 @@ function Navbar() {
         </a>
 
         {/* Desktop nav */}
-        <div className="d-none d-lg-flex gap-2 align-items-center">
+        <div className="d-none d-xl-flex gap-2 align-items-center">
           {categories.map((cat) => (
             <button
               key={cat.id}
@@ -67,7 +67,7 @@ function Navbar() {
 
         {/* Burger button */}
         <button
-          className="d-lg-none burger-btn"
+          className="d-xl-none burger-btn"
           aria-label={menuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
           aria-expanded={menuOpen}
           onClick={() => setMenuOpen((isOpen) => !isOpen)}
@@ -77,7 +77,7 @@ function Navbar() {
       </div>
 
       {/* Mobile menu déroulant */}
-      <div className={`mobile-menu d-lg-none${menuOpen ? ' open' : ''}`}>
+      <div className={`mobile-menu d-xl-none${menuOpen ? ' open' : ''}`}>
         <div className="mobile-menu-inner">
           {categories.map((cat) => (
             <button
