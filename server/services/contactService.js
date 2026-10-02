@@ -6,7 +6,7 @@ const transporter = require('../config/mailer');
 // dans MongoDB ; l'email part ensuite en arrière-plan : un échec SMTP est
 // journalisé sans bloquer la réponse au visiteur, et le message reste consultable.
 const sendContactMessage = async (artisanId, utilisateurId, { nom, email, objet, message }) => {
-  const artisan = await Artisan.findByPk(artisanId);
+  const artisan = await Artisan.scope('avecEmail').findByPk(artisanId);
 
   if (!artisan) {
     return false;

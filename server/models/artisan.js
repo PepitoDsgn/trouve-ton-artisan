@@ -48,6 +48,14 @@ const Artisan = sequelize.define(
   {
     tableName: 'artisans',
     timestamps: false,
+    // L'email de l'artisan n'est jamais envoyé au navigateur des membres :
+    // le contact passe par le formulaire, qui l'utilise côté serveur uniquement.
+    defaultScope: {
+      attributes: { exclude: ['email'] },
+    },
+    scopes: {
+      avecEmail: {},
+    },
   }
 );
 

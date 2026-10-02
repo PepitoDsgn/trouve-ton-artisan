@@ -1,6 +1,7 @@
 const express = require('express');
 const { body, param, query } = require('express-validator');
 const {
+  getArtisanForAdmin,
   createArtisan,
   updateArtisan,
   deleteArtisan,
@@ -46,6 +47,7 @@ const artisanValidation = (creation) => {
 
 router.get('/specialites', getAllSpecialites);
 
+router.get('/artisans/:id', idValidation, validate, getArtisanForAdmin);
 router.post('/artisans', artisanValidation(true), validate, createArtisan);
 router.put('/artisans/:id', idValidation, artisanValidation(false), validate, updateArtisan);
 router.delete('/artisans/:id', idValidation, validate, deleteArtisan);

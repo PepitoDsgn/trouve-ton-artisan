@@ -62,6 +62,9 @@ export const retirerFavori = (artisanId) => api.delete(`/favoris/${artisanId}`);
 export const adminGetSpecialites = () =>
   api.get('/admin/specialites').then((response) => response.data);
 
+export const adminGetArtisan = (id) =>
+  api.get(`/admin/artisans/${id}`).then((response) => response.data);
+
 export const adminCreerArtisan = (data) =>
   api.post('/admin/artisans', data).then((response) => response.data);
 

@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import {
   adminCreerArtisan,
+  adminGetArtisan,
   adminGetSpecialites,
   adminModifierArtisan,
-  getArtisan,
   messageErreur,
 } from '../services/api';
 import {
@@ -29,7 +29,7 @@ function useArtisanForm(id, { onSucces }) {
 
   useEffect(() => {
     if (!id) return;
-    getArtisan(id)
+    adminGetArtisan(id)
       .then((artisan) => setForm(versFormulaire(artisan)))
       .catch(() => setIntrouvable(true))
       .finally(() => setChargement(false));

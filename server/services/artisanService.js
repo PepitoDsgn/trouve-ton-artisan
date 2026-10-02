@@ -53,6 +53,12 @@ const findArtisanById = (id) =>
     include: [{ model: Specialite, include: [Categorie] }],
   });
 
+// Fiche complète, email compris : réservée au formulaire admin
+const findArtisanAvecEmailById = (id) =>
+  Artisan.scope('avecEmail').findByPk(id, {
+    include: [{ model: Specialite, include: [Categorie] }],
+  });
+
 const findArtisansDuMois = () =>
   Artisan.findAll({
     where: { artisanDuMois: true },
@@ -110,6 +116,7 @@ const supprimerArtisan = async (id) => {
 module.exports = {
   findAllArtisans,
   findArtisanById,
+  findArtisanAvecEmailById,
   findArtisansDuMois,
   creerArtisan,
   modifierArtisan,

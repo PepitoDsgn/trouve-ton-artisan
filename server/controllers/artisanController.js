@@ -24,6 +24,20 @@ const getArtisanById = async (req, res, next) => {
   }
 };
 
+const getArtisanForAdmin = async (req, res, next) => {
+  try {
+    const artisan = await artisanService.findArtisanAvecEmailById(req.params.id);
+
+    if (!artisan) {
+      return res.status(404).json({ message: 'Artisan introuvable' });
+    }
+
+    res.json(artisan);
+  } catch (error) {
+    next(error);
+  }
+};
+
 const getArtisansDuMois = async (req, res, next) => {
   try {
     const artisans = await artisanService.findArtisansDuMois();
@@ -74,6 +88,7 @@ module.exports = {
   getAllArtisans,
   getArtisanById,
   getArtisansDuMois,
+  getArtisanForAdmin,
   createArtisan,
   updateArtisan,
   deleteArtisan,
