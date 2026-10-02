@@ -40,7 +40,8 @@ trouve-ton-artisan/
 │   ├── tests/             # Tests d'intégration de l'API
 │   ├── app.js             # Application Express (utilisée par index.js et les tests)
 │   └── index.js           # Démarrage du serveur
-└── database/              # Scripts SQL de création et d'alimentation
+├── database/              # Scripts SQL de création et d'alimentation
+└── docs/                  # Schémas de conception (cas d'utilisation, MLD, MongoDB, séquences)
 ```
 
 ## Installation en local
