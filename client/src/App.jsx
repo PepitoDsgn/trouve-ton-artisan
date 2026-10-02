@@ -16,7 +16,9 @@ import DonneesPersonnelles from './pages/DonneesPersonnelles';
 import AdminArtisans from './pages/admin/AdminArtisans';
 import AdminArtisanForm from './pages/admin/AdminArtisanForm';
 import AdminMessages from './pages/admin/AdminMessages';
-import LegalPage from './pages/LegalPage';
+import MentionsLegales from './pages/MentionsLegales';
+import Cookies from './pages/Cookies';
+import Accessibilite from './pages/Accessibilite';
 import NotFound from './pages/NotFound';
 
 function App() {
@@ -42,9 +44,9 @@ function App() {
               <Route path="/admin/artisans/nouveau" element={<ProtectedRoute role="admin"><AdminArtisanForm /></ProtectedRoute>} />
               <Route path="/admin/artisans/:id" element={<ProtectedRoute role="admin"><AdminArtisanForm /></ProtectedRoute>} />
               <Route path="/admin/messages" element={<ProtectedRoute role="admin"><AdminMessages /></ProtectedRoute>} />
-              <Route path="/cookies" element={<LegalPage title="Cookies" />} />
-              <Route path="/mentions-legales" element={<LegalPage title="Mentions légales" />} />
-              <Route path="/accessibilite" element={<LegalPage title="Accessibilité" />} />
+              <Route path="/cookies" element={<Cookies />} />
+              <Route path="/mentions-legales" element={<MentionsLegales />} />
+              <Route path="/accessibilite" element={<Accessibilite />} />
               <Route path="/donnees-personnelles" element={<DonneesPersonnelles />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
