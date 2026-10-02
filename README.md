@@ -75,6 +75,8 @@ npm run dev               # http://localhost:5173
 | POST | `/api/auth/connexion` | public | Se connecter (5 échecs max / 15 min) |
 | POST | `/api/auth/deconnexion` | public | Se déconnecter |
 | GET | `/api/auth/moi` | membre | Utilisateur connecté |
+| GET | `/api/auth/moi/donnees` | membre | Export de ses données en JSON (RGPD) |
+| DELETE | `/api/auth/moi` | membre | Suppression de son compte, mot de passe requis (RGPD) |
 | GET | `/api/categories` | public | Catégories (menu) |
 | GET | `/api/artisans` | membre | Liste (`?categorie=`, `?recherche=`) |
 | GET | `/api/artisans/du-mois` | membre | Artisans du mois |
@@ -83,6 +85,7 @@ npm run dev               # http://localhost:5173
 | GET | `/api/favoris` | membre | Mes favoris |
 | PUT / DELETE | `/api/favoris/:artisanId` | membre | Ajouter / retirer un favori |
 | GET | `/api/admin/specialites` | admin | Spécialités (formulaire) |
+| GET | `/api/admin/artisans/:id` | admin | Fiche complète avec email (formulaire) |
 | POST | `/api/admin/artisans` | admin | Créer un artisan |
 | PUT / DELETE | `/api/admin/artisans/:id` | admin | Modifier / supprimer un artisan |
 | GET | `/api/admin/messages` | admin | Messages (`?lu=false`) |
@@ -96,6 +99,13 @@ npm run dev               # http://localhost:5173
 - Validation de toutes les entrées avec express-validator ; seuls les champs autorisés sont enregistrés.
 - Limitation de débit sur la connexion, l'inscription et le formulaire de contact.
 - En-têtes HTTP sécurisés avec helmet ; CORS limité à `CLIENT_URL`.
+- L'email des artisans n'est jamais envoyé au navigateur des membres (il sert uniquement côté serveur pour le formulaire de contact).
+
+## RGPD
+
+- Page « Données personnelles » : données collectées, finalités, destinataires, durées de conservation, cookie de session.
+- Page « Mon compte » : téléchargement de ses données (droit d'accès) et suppression du compte, des favoris et des messages envoyés (droit à l'effacement).
+- Messages de contact supprimés automatiquement après 12 mois (index TTL MongoDB).
 
 ## Démo en local
 
