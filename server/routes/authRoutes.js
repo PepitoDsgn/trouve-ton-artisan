@@ -6,6 +6,7 @@ const {
   deconnexion,
   moi,
 } = require('../controllers/authController');
+const { getMesDonnees, deleteMonCompte } = require('../controllers/compteController');
 const { requireAuth } = require('../middlewares/auth');
 const { connexionLimiter, inscriptionLimiter } = require('../middlewares/rateLimiter');
 const validate = require('../middlewares/validate');
@@ -37,5 +38,15 @@ router.post('/inscription', inscriptionLimiter, inscriptionValidation, validate,
 router.post('/connexion', connexionLimiter, connexionValidation, validate, connexion);
 router.post('/deconnexion', deconnexion);
 router.get('/moi', requireAuth, moi);
+router.get('/moi/donnees', requireAuth, getMesDonnees);
+// Même limite que la connexion : empêche de deviner le mot de passe par ce biais
+router.delete(
+  '/moi',
+  requireAuth,
+  connexionLimiter,
+  body('motDePasse').notEmpty().withMessage('Le mot de passe est obligatoire'),
+  validate,
+  deleteMonCompte
+);
 
 module.exports = router;
