@@ -80,6 +80,8 @@ npm test
 
 54 tests d'intégration de l'API (lanceur de tests intégré à Node + Supertest) : inscription et connexion, contrôle des rôles, favoris, gestion admin, règle des 3 artisans du mois, messages MongoDB, droits RGPD.
 
+Qualité du code côté client : `cd client && npm run lint` (ESLint, règles React et règles des hooks).
+
 Les tests tournent sur des bases dédiées (`trouve_ton_artisan_test` sur MariaDB et MongoDB), recréées à chaque fichier : les données de développement ne sont jamais modifiées. L'envoi d'emails est simulé. MariaDB et MongoDB doivent être démarrés.
 
 ## API
