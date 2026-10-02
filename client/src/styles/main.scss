@@ -400,6 +400,70 @@ main {
   }
 }
 
+// Espace admin
+.admin-nav {
+  display: flex;
+  gap: 8px;
+  border-bottom: 2px solid $bg-light;
+
+  .admin-nav-lien {
+    padding: 8px 18px;
+    font-weight: 600;
+    color: $dark-gray;
+    text-decoration: none;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+
+    &.active {
+      color: $primary;
+      border-bottom-color: $primary;
+    }
+  }
+}
+
+.admin-table {
+  th {
+    color: $primary-dark;
+    white-space: nowrap;
+  }
+}
+
+.admin-message {
+  border: 1px solid #dde6ee;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 12px;
+
+  &.non-lu {
+    border-left: 5px solid $primary;
+    background: $bg-light;
+  }
+
+  .admin-message-texte {
+    white-space: pre-line;
+  }
+}
+
+.btn-supprimer {
+  border: 1px solid $red-accent;
+  color: $red-accent;
+  background: #fff;
+
+  &:hover,
+  &:focus-visible {
+    background: $red-accent;
+    color: #fff;
+  }
+}
+
+.btn-annuler {
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.1rem;
+  padding: 12px 24px;
+  text-decoration: underline;
+}
+
 // Footer
 .footer-artisan {
   background-color: $dark-gray;

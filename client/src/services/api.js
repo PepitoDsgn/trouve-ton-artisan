@@ -57,3 +57,23 @@ export const getFavoris = () =>
 export const ajouterFavori = (artisanId) => api.put(`/favoris/${artisanId}`);
 
 export const retirerFavori = (artisanId) => api.delete(`/favoris/${artisanId}`);
+
+// Espace admin
+export const adminGetSpecialites = () =>
+  api.get('/admin/specialites').then((response) => response.data);
+
+export const adminCreerArtisan = (data) =>
+  api.post('/admin/artisans', data).then((response) => response.data);
+
+export const adminModifierArtisan = (id, data) =>
+  api.put(`/admin/artisans/${id}`, data).then((response) => response.data);
+
+export const adminSupprimerArtisan = (id) => api.delete(`/admin/artisans/${id}`);
+
+export const adminGetMessages = (params) =>
+  api.get('/admin/messages', { params }).then((response) => response.data);
+
+export const adminMarquerMessage = (id, lu) =>
+  api.patch(`/admin/messages/${id}`, { lu }).then((response) => response.data);
+
+export const adminSupprimerMessage = (id) => api.delete(`/admin/messages/${id}`);

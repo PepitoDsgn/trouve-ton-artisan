@@ -11,6 +11,9 @@ import DetailArtisan from './pages/DetailArtisan';
 import Connexion from './pages/Connexion';
 import Inscription from './pages/Inscription';
 import Favoris from './pages/Favoris';
+import AdminArtisans from './pages/admin/AdminArtisans';
+import AdminArtisanForm from './pages/admin/AdminArtisanForm';
+import AdminMessages from './pages/admin/AdminMessages';
 import LegalPage from './pages/LegalPage';
 import NotFound from './pages/NotFound';
 
@@ -32,6 +35,10 @@ function App() {
               <Route path="/artisans" element={<ProtectedRoute><ListeArtisans /></ProtectedRoute>} />
               <Route path="/artisans/:id" element={<ProtectedRoute><DetailArtisan /></ProtectedRoute>} />
               <Route path="/favoris" element={<ProtectedRoute><Favoris /></ProtectedRoute>} />
+              <Route path="/admin" element={<ProtectedRoute role="admin"><AdminArtisans /></ProtectedRoute>} />
+              <Route path="/admin/artisans/nouveau" element={<ProtectedRoute role="admin"><AdminArtisanForm /></ProtectedRoute>} />
+              <Route path="/admin/artisans/:id" element={<ProtectedRoute role="admin"><AdminArtisanForm /></ProtectedRoute>} />
+              <Route path="/admin/messages" element={<ProtectedRoute role="admin"><AdminMessages /></ProtectedRoute>} />
               <Route path="/cookies" element={<LegalPage title="Cookies" />} />
               <Route path="/mentions-legales" element={<LegalPage title="Mentions légales" />} />
               <Route path="/accessibilite" element={<LegalPage title="Accessibilité" />} />

@@ -27,6 +27,11 @@ function MenuCompte({ variante, onNavigate }) {
       <NavLink to="/favoris" className={classe} onClick={onNavigate}>
         Mes favoris
       </NavLink>
+      {utilisateur.role === 'admin' && (
+        <NavLink to="/admin" className={classe} onClick={onNavigate}>
+          Admin
+        </NavLink>
+      )}
       <button type="button" className={classe} onClick={handleDeconnexion}>
         Déconnexion
       </button>
