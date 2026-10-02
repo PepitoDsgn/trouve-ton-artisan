@@ -97,8 +97,11 @@ npm run dev               # http://localhost:5173
 - Limitation de débit sur la connexion, l'inscription et le formulaire de contact.
 - En-têtes HTTP sécurisés avec helmet ; CORS limité à `CLIENT_URL`.
 
-## Déploiement
+## Démo en local
 
-- Frontend sur Vercel, API sur Railway, MongoDB sur MongoDB Atlas.
-- Variables à définir sur Railway : celles de `server/.env.example`, avec `NODE_ENV=production`.
-- Le cookie de session doit être envoyé par le navigateur depuis le domaine du site. Pour éviter le blocage des cookies tiers (Safari), le frontend doit appeler l'API via une réécriture `/api` dans `client/vercel.json` vers l'URL Railway, plutôt que directement sur le domaine Railway.
+Le projet est présenté en local, sans hébergement en ligne. Avant une démonstration :
+
+1. Démarrer MariaDB (panneau XAMPP) et MongoDB (`brew services start mongodb-community`).
+2. Lancer l'API (`cd server && npm run dev`) : le terminal doit afficher les connexions à MariaDB et à MongoDB.
+3. Lancer le frontend (`cd client && npm run dev`) puis ouvrir http://localhost:5173.
+4. Se connecter avec un compte membre et avec le compte administrateur (défini dans `server/.env`).
