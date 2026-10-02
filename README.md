@@ -36,7 +36,10 @@ trouve-ton-artisan/
 │   ├── models/            # Modèles Sequelize (+ models/mongo pour Mongoose)
 │   ├── routes/            # Routes et validation des entrées (express-validator)
 │   ├── middlewares/       # Authentification, rôles, limitation de débit, erreurs
-│   └── scripts/           # createAdmin.js
+│   ├── scripts/           # createAdmin.js
+│   ├── tests/             # Tests d'intégration de l'API
+│   ├── app.js             # Application Express (utilisée par index.js et les tests)
+│   └── index.js           # Démarrage du serveur
 └── database/              # Scripts SQL de création et d'alimentation
 ```
 
@@ -66,6 +69,17 @@ npm run dev               # http://localhost:5173
 ```
 
 `npm run seed` (dans `server/`) recrée entièrement la base MariaDB : données de démo, artisans réels importés depuis l'API publique « Recherche d'entreprises », et compte administrateur.
+
+## Tests
+
+```bash
+cd server
+npm test
+```
+
+54 tests d'intégration de l'API (lanceur de tests intégré à Node + Supertest) : inscription et connexion, contrôle des rôles, favoris, gestion admin, règle des 3 artisans du mois, messages MongoDB, droits RGPD.
+
+Les tests tournent sur des bases dédiées (`trouve_ton_artisan_test` sur MariaDB et MongoDB), recréées à chaque fichier : les données de développement ne sont jamais modifiées. L'envoi d'emails est simulé. MariaDB et MongoDB doivent être démarrés.
 
 ## API
 
