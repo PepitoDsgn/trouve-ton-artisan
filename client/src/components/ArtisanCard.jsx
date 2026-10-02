@@ -19,7 +19,7 @@ function ArtisanCard({ artisan }) {
           />
         ) : (
           <div
-            className="artisan-card-img d-flex align-items-center justify-content-center bg-secondary"
+            className="artisan-card-img d-flex align-items-center justify-content-center image-absente"
             aria-hidden="true"
             style={{ aspectRatio: '4/3' }}
           >

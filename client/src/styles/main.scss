@@ -219,6 +219,11 @@ main {
 }
 
 // Artisan card
+// Fond affiché quand un artisan n'a pas d'image
+.image-absente {
+  background: $bg-light;
+}
+
 // Conteneur carte + bouton favori (le bouton est posé sur l'image)
 .artisan-card-wrapper {
   position: relative;

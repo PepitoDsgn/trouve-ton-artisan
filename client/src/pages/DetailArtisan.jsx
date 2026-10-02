@@ -36,7 +36,7 @@ function DetailArtisan() {
             />
           ) : (
             <div
-              className="rounded-4 mb-3 d-flex align-items-center justify-content-center bg-secondary"
+              className="rounded-4 mb-3 d-flex align-items-center justify-content-center image-absente"
               style={{ height: 280 }}
               aria-hidden="true"
             >
@@ -85,7 +85,7 @@ function DetailArtisan() {
           />
         ) : (
           <div
-            className="rounded-4 mb-3 d-flex align-items-center justify-content-center bg-secondary mx-auto"
+            className="rounded-4 mb-3 d-flex align-items-center justify-content-center image-absente mx-auto"
             style={{ height: 220, maxWidth: 340 }}
             aria-hidden="true"
           >
@@ -181,7 +181,6 @@ function DetailArtisan() {
                   className="form-control"
                   value={form.objet}
                   onChange={handleChange}
-                  required
                 />
               </div>
               <div className="d-none d-md-block">
