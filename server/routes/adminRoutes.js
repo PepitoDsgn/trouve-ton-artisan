@@ -28,7 +28,8 @@ const artisanValidation = (creation) => {
 
   return [
     champ('nom').trim().notEmpty().withMessage('Le nom est obligatoire').isLength({ max: 255 }),
-    champ('email').trim().isEmail().withMessage('Email invalide').normalizeEmail(),
+    // Pas de normalizeEmail : il modifierait l'adresse de contact réelle (points Gmail...)
+    champ('email').trim().isEmail().withMessage('Email invalide'),
     champ('ville').trim().notEmpty().withMessage('La ville est obligatoire').isLength({ max: 255 }),
     champ('specialiteId').isInt({ min: 1 }).withMessage('La spécialité est obligatoire').toInt(),
     body('description').optional({ values: 'null' }).trim().isLength({ max: 2000 }),
