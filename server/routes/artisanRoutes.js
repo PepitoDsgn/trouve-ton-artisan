@@ -13,10 +13,10 @@ const validate = require('../middlewares/validate');
 const router = express.Router();
 
 const contactValidation = [
-  body('nom').trim().notEmpty().withMessage('Le nom est obligatoire').isLength({ max: 100 }),
+  body('nom').trim().notEmpty().withMessage('Le nom est obligatoire').isLength({ max: 100 }).withMessage('Le nom ne doit pas dépasser 100 caractères'),
   body('email').trim().notEmpty().withMessage("L'email est obligatoire").isEmail().withMessage('Email invalide').normalizeEmail(),
-  body('objet').optional({ checkFalsy: true }).trim().isLength({ max: 150 }),
-  body('message').trim().notEmpty().withMessage('Le message est obligatoire').isLength({ max: 2000 }),
+  body('objet').optional({ checkFalsy: true }).trim().isLength({ max: 150 }).withMessage("L'objet ne doit pas dépasser 150 caractères"),
+  body('message').trim().notEmpty().withMessage('Le message est obligatoire').isLength({ max: 2000 }).withMessage('Le message ne doit pas dépasser 2000 caractères'),
 ];
 
 // Toutes les routes artisans sont réservées aux membres connectés

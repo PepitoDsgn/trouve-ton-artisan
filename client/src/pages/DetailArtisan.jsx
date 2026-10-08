@@ -154,6 +154,7 @@ function DetailArtisan() {
                   id="nom"
                   name="nom"
                   type="text"
+                  maxLength={100}
                   className="form-control"
                   value={form.nom}
                   onChange={handleChange}
@@ -178,6 +179,7 @@ function DetailArtisan() {
                   id="objet"
                   name="objet"
                   type="text"
+                  maxLength={150}
                   className="form-control"
                   value={form.objet}
                   onChange={handleChange}
@@ -195,6 +197,7 @@ function DetailArtisan() {
                 <textarea
                   id="message"
                   name="message"
+                  maxLength={2000}
                   className="form-control"
                   rows={8}
                   style={{ resize: 'none', height: 'calc(100% - 28px)' }}

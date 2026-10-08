@@ -28,18 +28,23 @@ const artisanValidation = (creation) => {
   const champ = (nom) => (creation ? body(nom) : body(nom).optional());
 
   return [
-    champ('nom').trim().notEmpty().withMessage('Le nom est obligatoire').isLength({ max: 255 }),
+    champ('nom').trim().notEmpty().withMessage('Le nom est obligatoire')
+      .isLength({ max: 255 }).withMessage('Le nom ne doit pas dépasser 255 caractères'),
     // Pas de normalizeEmail : il modifierait l'adresse de contact réelle (points Gmail...)
     champ('email').trim().isEmail().withMessage('Email invalide'),
-    champ('ville').trim().notEmpty().withMessage('La ville est obligatoire').isLength({ max: 255 }),
+    champ('ville').trim().notEmpty().withMessage('La ville est obligatoire')
+      .isLength({ max: 255 }).withMessage('La ville ne doit pas dépasser 255 caractères'),
     champ('specialiteId').isInt({ min: 1 }).withMessage('La spécialité est obligatoire').toInt(),
-    body('description').optional({ values: 'null' }).trim().isLength({ max: 2000 }),
+    body('description').optional({ values: 'null' }).trim()
+      .isLength({ max: 2000 }).withMessage('La description ne doit pas dépasser 2000 caractères'),
     body('telephone').optional({ values: 'falsy' }).trim()
       .matches(/^0\d{9}$/).withMessage('Le téléphone doit contenir 10 chiffres et commencer par 0'),
-    body('adresse').optional({ values: 'null' }).trim().isLength({ max: 255 }),
+    body('adresse').optional({ values: 'null' }).trim()
+      .isLength({ max: 255 }).withMessage("L'adresse ne doit pas dépasser 255 caractères"),
     body('codePostal').optional({ values: 'falsy' }).trim()
       .matches(/^\d{5}$/).withMessage('Le code postal doit contenir 5 chiffres'),
-    body('image').optional({ values: 'falsy' }).trim().isLength({ max: 500 })
+    body('image').optional({ values: 'falsy' }).trim()
+      .isLength({ max: 500 }).withMessage("L'adresse de l'image ne doit pas dépasser 500 caractères")
       .matches(/^(https:\/\/|\/images\/)/).withMessage("L'image doit être une URL https ou un chemin /images/..."),
     body('artisanDuMois').optional().isBoolean().withMessage('Valeur invalide').toBoolean(),
   ];

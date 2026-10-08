@@ -28,6 +28,12 @@ test('champs obligatoires validés (400), aucun email envoyé', async () => {
   assert.equal(envoiMail.mock.callCount(), 0);
 });
 
+test('message trop long : 400 avec un message explicite (écart corrigé du jeu d’essai)', async () => {
+  const res = await membre.post(`/api/artisans/${artisans[0].id}/contact`).send({ ...message, message: 'a'.repeat(2001) });
+  assert.equal(res.status, 400);
+  assert.equal(res.body.message, 'Le message ne doit pas dépasser 2000 caractères');
+});
+
 test('artisan inexistant → 404', async () => {
   assert.equal((await membre.post('/api/artisans/99999/contact').send(message)).status, 404);
 });
