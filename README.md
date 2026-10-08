@@ -91,11 +91,17 @@ cd server
 npm test
 ```
 
-54 tests d'intégration de l'API (lanceur de tests intégré à Node + Supertest) : inscription et connexion, contrôle des rôles, favoris, gestion admin, règle des 3 artisans du mois, messages MongoDB, droits RGPD.
-
-Qualité du code côté client : `cd client && npm run lint` (ESLint, règles React et règles des hooks).
+Côté serveur, 54 tests d'intégration de l'API (lanceur de tests intégré à Node + Supertest) : inscription et connexion, contrôle des rôles, favoris, gestion admin, règle des 3 artisans du mois, messages MongoDB, droits RGPD.
 
 Les tests tournent sur des bases dédiées (`trouve_ton_artisan_test` sur MariaDB et MongoDB), recréées à chaque fichier : les données de développement ne sont jamais modifiées. L'envoi d'emails est simulé. MariaDB et MongoDB doivent être démarrés.
+
+Côté client :
+
+```bash
+cd client
+npm test       # 26 tests unitaires des fonctions de validation et utilitaires (src/utils)
+npm run lint   # ESLint : règles React et règles des hooks
+```
 
 ## API
 
