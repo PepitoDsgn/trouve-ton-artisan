@@ -74,6 +74,16 @@ npm run dev               # http://localhost:5173
 
 `npm run seed` (dans `server/`) recrée entièrement la base MariaDB : données de démo, artisans réels importés depuis l'API publique « Recherche d'entreprises », et compte administrateur.
 
+## Sauvegarde et restauration
+
+```bash
+cd server
+npm run sauvegarde                                   # → server/backups/AAAA-MM-JJ_HHhMM/
+npm run restauration -- 2026-10-08_15h44 --confirmer # remplace les données actuelles
+```
+
+Chaque sauvegarde contient `mariadb.sql` (mysqldump, copie cohérente sans bloquer l'application) et `mongodb/` (mongodump). La restauration exige `--confirmer` car elle remplace les données actuelles ; sans argument, elle liste les sauvegardes disponibles. Le dossier `backups/` est ignoré par git : il contient des données personnelles.
+
 ## Tests
 
 ```bash

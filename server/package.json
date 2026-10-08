@@ -8,7 +8,9 @@
     "dev": "nodemon index.js",
     "seed": "node seed.js",
     "create-admin": "node scripts/createAdmin.js",
-    "test": "node --require ./tests/setupEnv.js --test --test-concurrency=1 \"tests/**/*.test.js\""
+    "test": "node --require ./tests/setupEnv.js --test --test-concurrency=1 \"tests/**/*.test.js\"",
+    "sauvegarde": "node scripts/sauvegarder.js",
+    "restauration": "node scripts/restaurer.js"
   },
   "keywords": [],
   "author": "",
