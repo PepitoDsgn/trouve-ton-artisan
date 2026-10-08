@@ -1,4 +1,5 @@
 require('dotenv').config();
+require('./config/compteAdminBdd')();
 const { sequelize, Categorie, Specialite, Artisan } = require('./models');
 const { fetchEntreprisesPourSpecialite } = require('./seedData/entreprisesApi');
 const { creerOuMettreAJourAdmin } = require('./services/authService');

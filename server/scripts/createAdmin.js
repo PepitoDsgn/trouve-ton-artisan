@@ -1,4 +1,5 @@
 require('dotenv').config();
+require('../config/compteAdminBdd')();
 const { sequelize, Utilisateur } = require('../models');
 const { creerOuMettreAJourAdmin } = require('../services/authService');
 

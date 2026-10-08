@@ -52,6 +52,9 @@ Prérequis : Node.js, MariaDB (ou MySQL) et MongoDB.
 # 1. Base MariaDB (crée la base, les tables et les données de démo)
 mysql -u root -p < database/create_database.sql
 mysql -u root -p < database/seed_database.sql
+# Compte de l'application (lecture/écriture uniquement) : remplacer d'abord
+# CHANGER_CE_MOT_DE_PASSE dans le script par la valeur de DB_PASSWORD
+mysql -u root -p < database/create_user.sql
 
 # 2. MongoDB (macOS / Homebrew)
 brew services start mongodb-community
@@ -112,6 +115,7 @@ Les tests tournent sur des bases dédiées (`trouve_ton_artisan_test` sur MariaD
 
 - Mots de passe hachés avec **bcrypt** (12 tours), jamais renvoyés par l'API.
 - Session : **JWT** (2 h) dans un cookie `httpOnly`, `SameSite=Lax`, `Secure` en production : inaccessible au JavaScript de la page.
+- Moindre privilège : l'application se connecte à MariaDB avec un compte limité à `SELECT`, `INSERT`, `UPDATE`, `DELETE` ; seuls les scripts de structure (seed, tests) utilisent le compte d'administration.
 - Rôles vérifiés côté serveur (`requireAuth`, `requireAdmin`) ; le frontend ne fait que masquer les pages.
 - Validation de toutes les entrées avec express-validator ; seuls les champs autorisés sont enregistrés.
 - Limitation de débit sur la connexion, l'inscription et le formulaire de contact.

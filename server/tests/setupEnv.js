@@ -1,6 +1,8 @@
 // Chargé avant chaque fichier de test : reprend la configuration locale (.env)
 // mais bascule sur des bases dédiées, pour ne jamais toucher aux vraies données.
 require('dotenv').config({ quiet: true });
+// Les tests recréent les tables : compte d'administration MariaDB
+require('../config/compteAdminBdd')();
 
 process.env.NODE_ENV = 'test';
 process.env.DB_NAME = 'trouve_ton_artisan_test';
