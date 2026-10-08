@@ -1,7 +1,11 @@
 import { useEffect, useState } from 'react';
 import { getArtisansDuMois } from '../services/api';
 
-// actif = false : pas de requête (visiteur non connecté, l'API répondrait 401)
+/**
+ * Loads the artisans of the month.
+ * @param {boolean} [actif=true] false = no request (logged-out visitor: the API would answer 401).
+ * @returns {object[]}
+ */
 function useArtisansDuMois(actif = true) {
   const [artisans, setArtisans] = useState([]);
 

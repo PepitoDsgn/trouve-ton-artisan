@@ -12,6 +12,12 @@ const HASH_FACTICE = bcrypt.hashSync('mot-de-passe-factice', SALT_ROUNDS);
 
 const versUtilisateurPublic = ({ id, email, role }) => ({ id, email, role });
 
+/**
+ * Registers a new member account (role is always "user").
+ * @param {{ email: string, motDePasse: string }} identifiants Validated, normalized input.
+ * @returns {Promise<{ id: number, email: string, role: string }>} Public user data (no hash).
+ * @throws {HttpError} 409 if the email is already used.
+ */
 const inscrire = async ({ email, motDePasse }) => {
   const existant = await Utilisateur.findOne({ where: { email } });
   if (existant) {
@@ -23,6 +29,13 @@ const inscrire = async ({ email, motDePasse }) => {
   return versUtilisateurPublic(utilisateur);
 };
 
+/**
+ * Checks credentials. Unknown email and wrong password give the same error,
+ * and take the same time (comparison against a dummy hash).
+ * @param {{ email: string, motDePasse: string }} identifiants
+ * @returns {Promise<{ id: number, email: string, role: string }>}
+ * @throws {HttpError} 401 if the credentials are invalid.
+ */
 const connecter = async ({ email, motDePasse }) => {
   const utilisateur = await Utilisateur.scope('avecMotDePasse').findOne({ where: { email } });
   const valide = await bcrypt.compare(motDePasse, utilisateur ? utilisateur.motDePasse : HASH_FACTICE);
@@ -33,13 +46,23 @@ const connecter = async ({ email, motDePasse }) => {
   return versUtilisateurPublic(utilisateur);
 };
 
+/**
+ * Signs a session JWT ({ sub: user id, role }) valid for dureeSessionSecondes.
+ * @param {{ id: number, role: string }} utilisateur
+ * @returns {string}
+ */
 const genererToken = (utilisateur) =>
   jwt.sign({ sub: utilisateur.id, role: utilisateur.role }, jwtSecret, {
     expiresIn: dureeSessionSecondes,
   });
 
-// Retourne l'utilisateur du token, ou null si le token est invalide, expiré
-// ou si le compte n'existe plus.
+/**
+ * Verifies a session JWT and reloads the user from the database, so that a
+ * deleted account or a changed role takes effect immediately.
+ * @param {string} token
+ * @returns {Promise<{ id: number, email: string, role: string }|null>}
+ *   null if the token is invalid, expired, or the account no longer exists.
+ */
 const verifierToken = async (token) => {
   try {
     const { sub } = jwt.verify(token, jwtSecret);
@@ -50,6 +73,12 @@ const verifierToken = async (token) => {
   }
 };
 
+/**
+ * Creates the administrator account, or resets its password and role if it exists.
+ * Used by `npm run create-admin` and the seed only (never exposed through the API).
+ * @param {{ email: string, motDePasse: string }} identifiants
+ * @returns {Promise<{ admin: object, cree: boolean }>}
+ */
 const creerOuMettreAJourAdmin = async ({ email, motDePasse }) => {
   const hash = await bcrypt.hash(motDePasse, SALT_ROUNDS);
   const [admin, cree] = await Utilisateur.findOrCreate({

@@ -3,7 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import useAuth from './useAuth';
 import { getMesDonnees, messageErreur } from '../services/api';
 
-// Page « Mon compte » : export des données et suppression du compte
+/**
+ * "Mon compte" page: GDPR data export (JSON download) and account deletion
+ * (password confirmation + browser confirm dialog).
+ * @returns {{ motDePasse: string, setMotDePasse: Function, erreur: string|null, envoi: boolean,
+ *   erreurExport: string|null, telechargerDonnees: Function, handleSupprimer: Function }}
+ */
 function useMonCompte() {
   const { supprimerCompte } = useAuth();
   const navigate = useNavigate();

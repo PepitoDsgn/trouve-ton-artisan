@@ -6,8 +6,12 @@ import {
   messageErreur,
 } from '../services/api';
 
-// Liste des artisans pour l'admin, avec suppression et bascule « artisan du mois ».
-// notification : { type, message } à afficher dans un Toast.
+/**
+ * Admin artisan list with deletion and "artisan of the month" toggle.
+ * @returns {{ artisans: object[], loading: boolean,
+ *   notification: { type: string, message: string }|null,
+ *   supprimer: Function, basculerDuMois: Function, fermerNotification: Function }}
+ */
 function useAdminArtisans() {
   const [artisans, setArtisans] = useState([]);
   const [loading, setLoading] = useState(true);

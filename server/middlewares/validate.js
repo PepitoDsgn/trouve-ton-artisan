@@ -1,5 +1,9 @@
 const { validationResult } = require('express-validator');
 
+/**
+ * Express middleware: answers 400 with the express-validator errors of the
+ * previous validation chain, or continues to the controller.
+ */
 const validate = (req, res, next) => {
   const result = validationResult(req);
   if (!result.isEmpty()) {

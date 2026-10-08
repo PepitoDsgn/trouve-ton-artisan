@@ -23,6 +23,12 @@ const extraireChamps = (donnees) =>
     CHAMPS_MODIFIABLES.filter((champ) => donnees[champ] !== undefined).map((champ) => [champ, donnees[champ]])
   );
 
+/**
+ * Lists artisans sorted by name, with their specialty and category.
+ * @param {{ categorie?: number|string, recherche?: string }} [filtres]
+ *   categorie: category id to filter on; recherche: case-insensitive name search.
+ * @returns {Promise<Artisan[]>} Artisans without their email address.
+ */
 const findAllArtisans = ({ categorie, recherche } = {}) => {
   const where = {};
   if (recherche) {
@@ -48,17 +54,30 @@ const findAllArtisans = ({ categorie, recherche } = {}) => {
   });
 };
 
+/**
+ * Finds one artisan with its specialty and category.
+ * @param {number|string} id
+ * @returns {Promise<Artisan|null>} null if not found. Email is excluded.
+ */
 const findArtisanById = (id) =>
   Artisan.findByPk(id, {
     include: [{ model: Specialite, include: [Categorie] }],
   });
 
-// Fiche complète, email compris : réservée au formulaire admin
+/**
+ * Same as findArtisanById, but includes the artisan's email. Admin form only.
+ * @param {number|string} id
+ * @returns {Promise<Artisan|null>}
+ */
 const findArtisanAvecEmailById = (id) =>
   Artisan.scope('avecEmail').findByPk(id, {
     include: [{ model: Specialite, include: [Categorie] }],
   });
 
+/**
+ * Lists the artisans of the month shown on the home page.
+ * @returns {Promise<Artisan[]>} At most MAX_ARTISANS_DU_MOIS artisans.
+ */
 const findArtisansDuMois = () =>
   Artisan.findAll({
     where: { artisanDuMois: true },
@@ -85,6 +104,13 @@ const verifierLimiteArtisansDuMois = async (artisanDuMois, artisanId = null) => 
   }
 };
 
+/**
+ * Creates an artisan from the whitelisted fields of the request body.
+ * @param {object} donnees Request body (unknown fields such as id are ignored).
+ * @returns {Promise<Artisan>} The created artisan.
+ * @throws {HttpError} 400 if the specialty does not exist,
+ *   409 if it would exceed the maximum number of artisans of the month.
+ */
 const creerArtisan = async (donnees) => {
   const champs = extraireChamps(donnees);
   await verifierSpecialite(champs.specialiteId);
@@ -94,7 +120,13 @@ const creerArtisan = async (donnees) => {
   return findArtisanById(artisan.id);
 };
 
-// Retourne null si l'artisan n'existe pas
+/**
+ * Partially updates an artisan (only the provided whitelisted fields).
+ * @param {number|string} id
+ * @param {object} donnees
+ * @returns {Promise<Artisan|null>} The updated artisan, or null if not found.
+ * @throws {HttpError} 400 unknown specialty, 409 artisan-of-the-month limit reached.
+ */
 const modifierArtisan = async (id, donnees) => {
   const artisan = await Artisan.findByPk(id);
   if (!artisan) return null;
@@ -107,7 +139,11 @@ const modifierArtisan = async (id, donnees) => {
   return findArtisanById(artisan.id);
 };
 
-// Retourne false si l'artisan n'existe pas. Ses favoris sont supprimés en cascade.
+/**
+ * Deletes an artisan. Its favorites are removed by the ON DELETE CASCADE foreign key.
+ * @param {number|string} id
+ * @returns {Promise<boolean>} false if the artisan did not exist.
+ */
 const supprimerArtisan = async (id) => {
   const nbSupprimes = await Artisan.destroy({ where: { id } });
   return nbSupprimes > 0;

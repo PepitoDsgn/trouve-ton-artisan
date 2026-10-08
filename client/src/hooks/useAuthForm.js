@@ -1,8 +1,14 @@
 import { useState } from 'react';
 import { messageErreur } from '../services/api';
 
-// Formulaire de connexion / inscription : état des champs, validation locale,
-// envoi et message d'erreur de l'API.
+/**
+ * Generic login / sign-up form: field state, local validation, submission
+ * and API error message.
+ * @param {{ champsInitiaux: object, valider: (form: object) => string|null,
+ *   soumettre: (form: object) => Promise<void> }} options
+ * @returns {{ form: object, erreur: string|null, envoi: boolean,
+ *   handleChange: Function, handleSubmit: Function }}
+ */
 function useAuthForm({ champsInitiaux, valider, soumettre }) {
   const [form, setForm] = useState(champsInitiaux);
   const [erreur, setErreur] = useState(null);

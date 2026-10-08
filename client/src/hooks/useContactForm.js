@@ -4,7 +4,14 @@ import { validateContactForm } from '../utils/contactValidation';
 
 const formulaireVide = (email) => ({ nom: '', email, objet: '', message: '' });
 
-// emailParDefaut : email du membre connecté, pré-rempli et modifiable
+/**
+ * Contact form state: client-side validation, sending and status message.
+ * @param {string} artisanId
+ * @param {string} [emailParDefaut] Logged-in member's email, pre-filled and editable.
+ * @returns {{ form: object, statut: string|null, handleChange: Function,
+ *   handleSubmit: Function, resetStatut: Function }}
+ *   statut: 'success' | 'validation' | 'emailInvalid' | 'error' | null
+ */
 function useContactForm(artisanId, emailParDefaut = '') {
   const [form, setForm] = useState(() => formulaireVide(emailParDefaut));
   const [statut, setStatut] = useState(null);

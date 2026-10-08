@@ -6,7 +6,12 @@ import {
   messageErreur,
 } from '../services/api';
 
-// filtre : 'tous' ou 'non-lus'
+/**
+ * Admin contact messages with read / unread toggle and deletion.
+ * @param {'tous'|'non-lus'} filtre
+ * @returns {{ messages: object[], loading: boolean, notification: object|null,
+ *   basculerLu: Function, supprimer: Function, fermerNotification: Function }}
+ */
 function useAdminMessages(filtre) {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(true);

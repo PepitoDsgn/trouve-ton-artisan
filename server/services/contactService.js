@@ -2,6 +2,14 @@ const { Artisan } = require('../models');
 const Message = require('../models/mongo/message');
 const transporter = require('../config/mailer');
 
+/**
+ * Stores a contact message in MongoDB, then emails it to the artisan.
+ * The artisan's email is only read here, server-side.
+ * @param {number|string} artisanId
+ * @param {number} utilisateurId Logged-in member who sends the message.
+ * @param {{ nom: string, email: string, objet?: string, message: string }} contenu
+ * @returns {Promise<boolean>} false if the artisan does not exist.
+ */
 // Retourne false si l'artisan n'existe pas. Le message est d'abord enregistré
 // dans MongoDB ; l'email part ensuite en arrière-plan : un échec SMTP est
 // journalisé sans bloquer la réponse au visiteur, et le message reste consultable.

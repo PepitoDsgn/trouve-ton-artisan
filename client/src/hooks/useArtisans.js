@@ -1,6 +1,12 @@
 import { useEffect, useState } from 'react';
 import { getArtisans } from '../services/api';
 
+/**
+ * Loads the artisan list for a category and/or a name search.
+ * Ignores late responses when the filters change quickly.
+ * @param {{ categorie?: string|null, recherche?: string|null }} filtres
+ * @returns {{ artisans: object[], loading: boolean }}
+ */
 function useArtisans({ categorie, recherche }) {
   const [artisans, setArtisans] = useState([]);
   const [loading, setLoading] = useState(true);

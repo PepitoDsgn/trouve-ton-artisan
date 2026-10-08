@@ -14,7 +14,14 @@ import {
 } from '../utils/artisanValidation';
 import { imageSpecialite } from '../utils/slugify';
 
-// Formulaire admin de création (id absent) ou de modification d'un artisan
+/**
+ * Admin artisan form: creation (no id) or edition. Picks the specialty
+ * illustration automatically unless a custom image was entered.
+ * @param {string} [id] Artisan id to edit.
+ * @param {{ onSucces: (artisan: object) => void }} options
+ * @returns {{ form: object, specialites: object[], chargement: boolean, introuvable: boolean,
+ *   erreur: string|null, envoi: boolean, handleChange: Function, handleSubmit: Function }}
+ */
 function useArtisanForm(id, { onSucces }) {
   const [form, setForm] = useState(formulaireArtisanVide);
   const [specialites, setSpecialites] = useState([]);
